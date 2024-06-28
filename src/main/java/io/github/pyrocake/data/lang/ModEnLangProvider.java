@@ -15,6 +15,8 @@ public class ModEnLangProvider extends LanguageProvider {
     protected void addTranslations() {
         //Items
         addItem(ItemInit.PRISMALLON_INGOT, "Prismallon Ingot");
+        addItem(ItemInit.RAW_PRISMALLON, "Raw Prismallon");
+        addItem(ItemInit.PRISMALLON_NUGGET, "Prismallon Nugget");
 
         //Misc
         add(CreativeModeTabInit.RADIANT_TAB_TITLE, "Radiant");

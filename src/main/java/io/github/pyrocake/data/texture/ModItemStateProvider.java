@@ -17,6 +17,8 @@ public class ModItemStateProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         item(ItemInit.PRISMALLON_INGOT.get());
+        item(ItemInit.RAW_PRISMALLON.get());
+        item(ItemInit.PRISMALLON_NUGGET.get());
     }
 
     private void item(Item item) {
