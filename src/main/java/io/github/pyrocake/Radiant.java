@@ -1,6 +1,7 @@
 package io.github.pyrocake;
 
 import io.github.pyrocake.data.DataGenerators;
+import io.github.pyrocake.init.BlockInit;
 import io.github.pyrocake.init.CreativeModeTabInit;
 import io.github.pyrocake.init.ItemInit;
 import net.neoforged.bus.api.IEventBus;
@@ -18,6 +19,7 @@ public class Radiant {
 
     public Radiant(@NotNull IEventBus bus) {
         ItemInit.ITEMS.register(bus);
+        BlockInit.BLOCKS.register(bus);
         CreativeModeTabInit.CREATIVE_MODE_TABS.register(bus);
 
         bus.addListener(DataGenerators::gatherData);

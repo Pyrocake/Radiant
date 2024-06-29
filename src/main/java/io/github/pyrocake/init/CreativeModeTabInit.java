@@ -29,7 +29,11 @@ public class CreativeModeTabInit {
                     .filter(addedItems::add)
                     .forEach(output::accept);
 
-
+            BlockInit.BLOCKS.getEntries()
+                    .stream()
+                    .map((block) -> block.get().asItem())
+                    .filter(addedItems::add)
+                    .forEach(output::accept);
         });
 
         builder.icon(() -> new ItemStack(ItemInit.PRISMALLON_INGOT.get()));
