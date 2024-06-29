@@ -9,8 +9,6 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-import java.util.concurrent.BlockingDeque;
-
 public class ModBlockStateProvider extends BlockStateProvider {
 
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -19,11 +17,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        normalBlock(BlockInit.PRISMALLON_BLOCK.get());
-        normalBlock(BlockInit.RAW_PRISMALLON_BLOCK.get());
+        standardBlock(BlockInit.PRISMALLON_BLOCK.get());
+        standardBlock(BlockInit.RAW_PRISMALLON_BLOCK.get());
+        standardBlock(BlockInit.PRISMALLON_ORE.get());
     }
 
-    private void normalBlock(Block block) {
+    private void standardBlock(Block block) {
         ResourceLocation blockKey = BuiltInRegistries.BLOCK.getKey(block);
         String path = blockKey.getPath();
         simpleBlock(block, models().cubeAll(path, modLoc("block/" + path)));
