@@ -1,2 +1,4 @@
-// 1.21	2024-06-29T20:06:46.4905099	Tags for minecraft:block mod id radiant
-2bfa19c154bd67b3bf54e6bd4ecf9fb0349dfc32 data/minecraft/tags/block/mineable/pickaxe.json
+// 1.21	2024-06-29T21:11:06.2818302	Tags for minecraft:block mod id radiant
+7090e59011d9cc6211e2ced3d8f48b9ee8517dd1 data/minecraft/tags/block/mineable/pickaxe.json
+73feb879597a3cd8df3eadd7465336758de1e5ab data/minecraft/tags/block/needs_iron_tool.json
+66939be2f0c184b431fdf4f46081faddbb276e5e data/radiant/tags/block/prismallon_block.json
