@@ -2,6 +2,7 @@ package io.github.pyrocake.data;
 
 import io.github.pyrocake.Radiant;
 import io.github.pyrocake.data.lang.ModEnLangProvider;
+import io.github.pyrocake.data.loottable.ModLootTables;
 import io.github.pyrocake.data.tag.ModBlockTagProvider;
 import io.github.pyrocake.data.texture.ModBlockStateProvider;
 import io.github.pyrocake.data.texture.ModItemStateProvider;
@@ -20,6 +21,7 @@ public class DataGenerators {
             generator.addProvider(true, new ModEnLangProvider(output));
             generator.addProvider(true, new ModItemStateProvider(output, existingFileHelper));
             generator.addProvider(true, new ModBlockStateProvider(output, existingFileHelper));
+            generator.addProvider(true, new ModLootTables(output, event.getLookupProvider()));
             generator.addProvider(true, new ModBlockTagProvider(output, event.getLookupProvider(), existingFileHelper));
         } catch (RuntimeException e) {
             Radiant.logger.error("Failed to get data", e);
