@@ -23,6 +23,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         copy(TagsInit.BlockTagsInit.PRISMALLON_BLOCK_TAG, TagsInit.ItemTagsInit.PRISMALLON_BLOCK_TAG);
 
         tag(TagsInit.ItemTagsInit.PRISMALLON_INGOT_TAG).add(ItemInit.PRISMALLON_INGOT.get());
+
+        // Hypothetical
         // tag(ItemTags.TRIMMABLE_ARMOR
     }
 }
