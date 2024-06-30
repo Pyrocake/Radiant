@@ -29,7 +29,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .addTag(TagsInit.BlockTagsInit.PRISMALLON_BLOCK_TAG);
 
-
-        //TagKey<Block> name = createNeoForgeTag( info )
+        // Hypothetical
+        // TagKey<Block> name = createNeoForgeTag( info )
     }
 }

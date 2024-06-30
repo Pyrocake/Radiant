@@ -24,7 +24,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         tag(TagsInit.ItemTagsInit.PRISMALLON_INGOT_TAG).add(ItemInit.PRISMALLON_INGOT.get());
 
-        // Hypothetical
+        // Hypothetical tag
         // tag(ItemTags.TRIMMABLE_ARMOR
     }
 }
