@@ -5,9 +5,7 @@ import io.github.pyrocake.init.BlockInit;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,7 +22,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(BlockInit.PRISMALLON_BLOCK.get());
         dropSelf(BlockInit.RAW_PRISMALLON_BLOCK.get());
-        dropSelf(BlockInit.PRISMALLON_ORE.get());
+        dropSelf(BlockInit.PRISMALLON_ORE_BLOCK.get());
     }
 
     @Override

@@ -25,7 +25,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .addTag(TagsInit.BlockTagsInit.PRISMALLON_BLOCK_TAG)
                 .add(BlockInit.RAW_PRISMALLON_BLOCK.get())
-                .add(BlockInit.PRISMALLON_ORE.get());
+                .add(BlockInit.PRISMALLON_ORE_BLOCK.get());
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .addTag(TagsInit.BlockTagsInit.PRISMALLON_BLOCK_TAG);
 

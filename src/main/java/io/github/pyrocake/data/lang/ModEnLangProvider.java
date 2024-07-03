@@ -22,7 +22,7 @@ public class ModEnLangProvider extends LanguageProvider {
         //Blocks
         addBlock(BlockInit.PRISMALLON_BLOCK, "Prismallon Block");
         addBlock(BlockInit.RAW_PRISMALLON_BLOCK, "Raw Prismallon Block");
-        addBlock(BlockInit.PRISMALLON_ORE, "Prismallon Ore");
+        addBlock(BlockInit.PRISMALLON_ORE_BLOCK, "Prismallon Ore");
 
         //Misc
         add(CreativeModeTabInit.RADIANT_TAB_TITLE, "Radiant");

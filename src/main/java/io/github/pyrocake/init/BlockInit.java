@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforgespi.locating.ForgeFeature;
 
 import java.util.function.Supplier;
 
@@ -16,8 +17,7 @@ public class BlockInit {
 
     public static final DeferredBlock<Block> PRISMALLON_BLOCK = registerBlock("prismallon_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
     public static final DeferredBlock<Block> RAW_PRISMALLON_BLOCK = registerBlock("raw_prismallon_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
-    public static final DeferredBlock<Block> PRISMALLON_ORE = registerBlock("prismallon_ore", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
-
+    public static final DeferredBlock<Block> PRISMALLON_ORE_BLOCK = registerBlock("prismallon_ore", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
 
     public static DeferredBlock<Block> registerBlock(String name, Supplier<Block> block) {
         DeferredBlock<Block> blockReg = BLOCKS.register(name, block);

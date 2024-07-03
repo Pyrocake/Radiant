@@ -19,7 +19,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         standardBlock(BlockInit.PRISMALLON_BLOCK.get());
         standardBlock(BlockInit.RAW_PRISMALLON_BLOCK.get());
-        standardBlock(BlockInit.PRISMALLON_ORE.get());
+        standardBlock(BlockInit.PRISMALLON_ORE_BLOCK.get());
     }
 
     private void standardBlock(Block block) {
