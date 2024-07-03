@@ -1,9 +1,9 @@
 package io.github.pyrocake;
 
 import io.github.pyrocake.data.DataGenerators;
-import io.github.pyrocake.init.BlockInit;
-import io.github.pyrocake.init.CreativeModeTabInit;
-import io.github.pyrocake.init.ItemInit;
+import io.github.pyrocake.block.BlockInit;
+import io.github.pyrocake.item.CreativeModeTabInit;
+import io.github.pyrocake.item.ItemInit;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;

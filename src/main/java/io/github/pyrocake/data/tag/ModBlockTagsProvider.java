@@ -1,8 +1,8 @@
 package io.github.pyrocake.data.tag;
 
 import io.github.pyrocake.Radiant;
-import io.github.pyrocake.init.BlockInit;
-import io.github.pyrocake.init.TagsInit;
+import io.github.pyrocake.block.BlockInit;
+import io.github.pyrocake.tag.TagsInit;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;

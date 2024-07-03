@@ -1,7 +1,7 @@
 package io.github.pyrocake.data.loottable;
 
 import io.github.pyrocake.Radiant;
-import io.github.pyrocake.init.BlockInit;
+import io.github.pyrocake.block.BlockInit;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;

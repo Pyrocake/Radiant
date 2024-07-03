@@ -1,7 +1,7 @@
 package io.github.pyrocake.data.texture;
 
 import io.github.pyrocake.Radiant;
-import io.github.pyrocake.init.ItemInit;
+import io.github.pyrocake.item.ItemInit;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;

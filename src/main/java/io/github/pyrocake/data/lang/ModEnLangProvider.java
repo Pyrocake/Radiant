@@ -1,9 +1,9 @@
 package io.github.pyrocake.data.lang;
 
 import io.github.pyrocake.Radiant;
-import io.github.pyrocake.init.BlockInit;
-import io.github.pyrocake.init.CreativeModeTabInit;
-import io.github.pyrocake.init.ItemInit;
+import io.github.pyrocake.block.BlockInit;
+import io.github.pyrocake.item.CreativeModeTabInit;
+import io.github.pyrocake.item.ItemInit;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 

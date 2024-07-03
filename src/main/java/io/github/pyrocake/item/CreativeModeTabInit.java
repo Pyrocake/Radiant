@@ -1,6 +1,7 @@
-package io.github.pyrocake.init;
+package io.github.pyrocake.item;
 
 import io.github.pyrocake.Radiant;
+import io.github.pyrocake.block.BlockInit;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;

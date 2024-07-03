@@ -1,7 +1,7 @@
 package io.github.pyrocake.data.texture;
 
 import io.github.pyrocake.Radiant;
-import io.github.pyrocake.init.BlockInit;
+import io.github.pyrocake.block.BlockInit;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
