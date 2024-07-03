@@ -1,4 +1,4 @@
-package io.github.pyrocake.init;
+package io.github.pyrocake.util;
 
 import io.github.pyrocake.Radiant;
 import net.minecraft.core.registries.BuiltInRegistries;

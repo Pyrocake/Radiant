@@ -1,9 +1,10 @@
 package io.github.pyrocake.data.lang;
 
 import io.github.pyrocake.Radiant;
-import io.github.pyrocake.init.BlockInit;
-import io.github.pyrocake.init.CreativeModeTabInit;
-import io.github.pyrocake.init.ItemInit;
+import io.github.pyrocake.block.BlockInit;
+import io.github.pyrocake.block.custom.SunBlock;
+import io.github.pyrocake.item.CreativeModeTabInit;
+import io.github.pyrocake.item.ItemInit;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
@@ -23,6 +24,9 @@ public class ModEnLangProvider extends LanguageProvider {
         addBlock(BlockInit.PRISMALLON_BLOCK, "Prismallon Block");
         addBlock(BlockInit.RAW_PRISMALLON_BLOCK, "Raw Prismallon Block");
         addBlock(BlockInit.PRISMALLON_ORE_BLOCK, "Prismallon Ore");
+        addBlock(BlockInit.DEEPSLATE_PRISMALLON_ORE_BLOCK, "Deepslate Prismallon Ore");
+
+        addBlock(BlockInit.SUN_BLOCK, "Sun Block WIP");
 
         //Misc
         add(CreativeModeTabInit.RADIANT_TAB_TITLE, "Radiant");

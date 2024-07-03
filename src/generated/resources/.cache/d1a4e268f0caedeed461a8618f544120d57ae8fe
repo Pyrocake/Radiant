@@ -1,10 +1,16 @@
-// 1.21	2024-06-29T03:28:15.3620836	Block States: radiant
+// 1.21	2024-07-03T21:11:53.7681961	Block States: radiant
+00ea6adf045857aecd8825757d196dd2e055fef7 assets/radiant/blockstates/deepslate_prismallon_ore.json
 4f2a03609d6862d2bb545cb2d340380fa5e2855a assets/radiant/blockstates/prismallon_block.json
 90ecfad8648e229082fe44254f913b1c36364f59 assets/radiant/blockstates/prismallon_ore.json
 bc76823d7e8cad7730aef76a87aee525f52672a0 assets/radiant/blockstates/raw_prismallon_block.json
+08fe0bcf63cc54fc9e6f5ec2ffbedc3614d836c0 assets/radiant/blockstates/sun_block.json
+9325b538aa8381373474e01ee64c7302099204d0 assets/radiant/models/block/deepslate_prismallon_ore.json
 5bb078a65ee81efa8451a805967c592a03030f48 assets/radiant/models/block/prismallon_block.json
 587c77d8ce9cb4598a624311f28bf2116cbc69ea assets/radiant/models/block/prismallon_ore.json
 781d14c1a20f3759329c8a455cf87437862c707a assets/radiant/models/block/raw_prismallon_block.json
+246d796615b0b16d0cbf22827d47408556c18e1e assets/radiant/models/block/sun_block.json
+5b303ef47ac7ad38fde9808b4b6f36aae3bcc818 assets/radiant/models/item/deepslate_prismallon_ore.json
 2232075b8ff45d3d5871657b6021dbee0512be37 assets/radiant/models/item/prismallon_block.json
 2268351f588f5f07d93fd3abf6e143bb69f923fb assets/radiant/models/item/prismallon_ore.json
 91d271cf2f75f391df0a6316de8f4ff1968a207c assets/radiant/models/item/raw_prismallon_block.json
+b6023748d0b1bd4bb36e48760f453a9a6ca5691e assets/radiant/models/item/sun_block.json

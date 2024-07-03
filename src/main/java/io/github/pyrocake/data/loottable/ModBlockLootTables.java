@@ -1,7 +1,7 @@
 package io.github.pyrocake.data.loottable;
 
 import io.github.pyrocake.Radiant;
-import io.github.pyrocake.init.BlockInit;
+import io.github.pyrocake.block.BlockInit;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -23,6 +23,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockInit.PRISMALLON_BLOCK.get());
         dropSelf(BlockInit.RAW_PRISMALLON_BLOCK.get());
         dropSelf(BlockInit.PRISMALLON_ORE_BLOCK.get());
+        dropSelf(BlockInit.DEEPSLATE_PRISMALLON_ORE_BLOCK.get());
+        dropSelf(BlockInit.SUN_BLOCK.get());
     }
 
     @Override

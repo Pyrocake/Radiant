@@ -1,4 +1,4 @@
-package io.github.pyrocake.init;
+package io.github.pyrocake.item;
 
 import io.github.pyrocake.Radiant;
 import net.minecraft.world.item.Item;

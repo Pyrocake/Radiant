@@ -1,8 +1,8 @@
 package io.github.pyrocake.data.tag;
 
 import io.github.pyrocake.Radiant;
-import io.github.pyrocake.init.BlockInit;
-import io.github.pyrocake.init.TagsInit;
+import io.github.pyrocake.block.BlockInit;
+import io.github.pyrocake.util.TagsInit;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -25,7 +25,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .addTag(TagsInit.BlockTagsInit.PRISMALLON_BLOCK_TAG)
                 .add(BlockInit.RAW_PRISMALLON_BLOCK.get())
-                .add(BlockInit.PRISMALLON_ORE_BLOCK.get());
+                .add(BlockInit.PRISMALLON_ORE_BLOCK.get())
+                .add(BlockInit.DEEPSLATE_PRISMALLON_ORE_BLOCK.get());
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .addTag(TagsInit.BlockTagsInit.PRISMALLON_BLOCK_TAG);
 

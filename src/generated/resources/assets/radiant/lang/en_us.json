@@ -1,7 +1,9 @@
 {
+  "block.radiant.deepslate_prismallon_ore": "Deepslate Prismallon Ore",
   "block.radiant.prismallon_block": "Prismallon Block",
   "block.radiant.prismallon_ore": "Prismallon Ore",
   "block.radiant.raw_prismallon_block": "Raw Prismallon Block",
+  "block.radiant.sun_block": "Sun Block WIP",
   "item.radiant.prismallon_ingot": "Prismallon Ingot",
   "item.radiant.prismallon_nugget": "Prismallon Nugget",
   "item.radiant.raw_prismallon": "Raw Prismallon",
