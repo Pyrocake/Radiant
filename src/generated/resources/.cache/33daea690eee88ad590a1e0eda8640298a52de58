@@ -1,4 +1,5 @@
-// 1.21	2024-07-03T19:32:15.5368153	Tags for minecraft:block mod id radiant
+// 1.21	2024-07-04T04:57:29.263918	Tags for minecraft:block mod id radiant
+c03875464f9b84fc2a8707c57443c001c7cdc08f data/c/tags/block/ores.json
 f13c2b888b79064fe04b5c03181074f85e88d5e5 data/minecraft/tags/block/mineable/pickaxe.json
 73feb879597a3cd8df3eadd7465336758de1e5ab data/minecraft/tags/block/needs_iron_tool.json
 66939be2f0c184b431fdf4f46081faddbb276e5e data/radiant/tags/block/prismallon_block.json

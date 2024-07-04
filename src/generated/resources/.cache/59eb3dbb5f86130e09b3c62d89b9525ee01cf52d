@@ -1,6 +1,6 @@
-// 1.21	2024-07-03T21:11:53.7671955	Loot Tables
-76fb78a14776a68343e47301cbd16acce5a17c6a data/radiant/loot_table/blocks/deepslate_prismallon_ore.json
+// 1.21	2024-07-04T05:52:32.8027487	Loot Tables
+b602adb4d829e867ca4732561d9bdfa28a4ce6dd data/radiant/loot_table/blocks/deepslate_prismallon_ore.json
 9daa1059e787153d1504d8388d11fcfb81071a64 data/radiant/loot_table/blocks/prismallon_block.json
-f729a09390666285f397b8a2a1ce2307beffbc1d data/radiant/loot_table/blocks/prismallon_ore.json
+589799e79721b4710e4f1237d34406071d809a2e data/radiant/loot_table/blocks/prismallon_ore.json
 62d2b0577ba5a1be49a4fa51e085b36451f92221 data/radiant/loot_table/blocks/raw_prismallon_block.json
 789b917bc0a4f4bd8a38958d7b253eb4fce0d501 data/radiant/loot_table/blocks/sun_block.json

@@ -1,7 +1,7 @@
 package io.github.pyrocake.item;
 
 import io.github.pyrocake.Radiant;
-import io.github.pyrocake.block.BlockInit;
+import io.github.pyrocake.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -24,20 +24,20 @@ public class CreativeModeTabInit {
         builder.displayItems((itemDisplay, output) -> {
             Set<Item> addedItems = new HashSet<>();
 
-            ItemInit.ITEMS.getEntries()
+            ModItems.ITEMS.getEntries()
                     .stream()
                     .map((item) -> item.get().asItem())
                     .filter(addedItems::add)
                     .forEach(output::accept);
 
-            BlockInit.BLOCKS.getEntries()
+            ModBlocks.BLOCKS.getEntries()
                     .stream()
                     .map((block) -> block.get().asItem())
                     .filter(addedItems::add)
                     .forEach(output::accept);
         });
 
-        builder.icon(() -> new ItemStack(ItemInit.PRISMALLON_INGOT.get()));
+        builder.icon(() -> new ItemStack(ModItems.PRISMALLON_INGOT.get()));
         builder.title(Component.translatable(RADIANT_TAB_TITLE));
 
         return builder.build();

@@ -1,9 +1,9 @@
 package io.github.pyrocake;
 
 import io.github.pyrocake.data.DataGenerators;
-import io.github.pyrocake.block.BlockInit;
+import io.github.pyrocake.block.ModBlocks;
 import io.github.pyrocake.item.CreativeModeTabInit;
-import io.github.pyrocake.item.ItemInit;
+import io.github.pyrocake.item.ModItems;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
@@ -18,8 +18,8 @@ public class Radiant {
     public static final Logger logger = LoggerFactory.getLogger(Radiant.class);
 
     public Radiant(@NotNull IEventBus bus) {
-        ItemInit.ITEMS.register(bus);
-        BlockInit.BLOCKS.register(bus);
+        ModItems.ITEMS.register(bus);
+        ModBlocks.BLOCKS.register(bus);
         CreativeModeTabInit.CREATIVE_MODE_TABS.register(bus);
 
         bus.addListener(DataGenerators::gatherData);

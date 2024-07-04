@@ -1,7 +1,7 @@
 package io.github.pyrocake.data.tag;
 
 import io.github.pyrocake.Radiant;
-import io.github.pyrocake.item.ItemInit;
+import io.github.pyrocake.item.ModItems;
 import io.github.pyrocake.util.TagsInit;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -21,7 +21,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         copy(TagsInit.Blocks.PRISMALLON_BLOCK_TAG, TagsInit.Items.PRISMALLON_BLOCK_TAG);
 
-        tag(TagsInit.Items.PRISMALLON_INGOT_TAG).add(ItemInit.PRISMALLON_INGOT.get());
+        tag(TagsInit.Items.PRISMALLON_INGOT_TAG).add(ModItems.PRISMALLON_INGOT.get());
 
         // Hypothetical tag
         // tag(ItemTags.TRIMMABLE_ARMOR
