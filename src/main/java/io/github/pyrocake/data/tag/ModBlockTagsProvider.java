@@ -20,15 +20,15 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(TagsInit.BlockTagsInit.PRISMALLON_BLOCK_TAG).add(BlockInit.PRISMALLON_BLOCK.get());
+        tag(TagsInit.Blocks.PRISMALLON_BLOCK_TAG).add(BlockInit.PRISMALLON_BLOCK.get());
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .addTag(TagsInit.BlockTagsInit.PRISMALLON_BLOCK_TAG)
+                .addTag(TagsInit.Blocks.PRISMALLON_BLOCK_TAG)
                 .add(BlockInit.RAW_PRISMALLON_BLOCK.get())
                 .add(BlockInit.PRISMALLON_ORE_BLOCK.get())
                 .add(BlockInit.DEEPSLATE_PRISMALLON_ORE_BLOCK.get());
         tag(BlockTags.NEEDS_IRON_TOOL)
-                .addTag(TagsInit.BlockTagsInit.PRISMALLON_BLOCK_TAG);
+                .addTag(TagsInit.Blocks.PRISMALLON_BLOCK_TAG);
 
         // Hypothetical
         // TagKey<Block> name = createNeoForgeTag( info )

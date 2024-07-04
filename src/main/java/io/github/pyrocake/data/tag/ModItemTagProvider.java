@@ -19,9 +19,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        copy(TagsInit.BlockTagsInit.PRISMALLON_BLOCK_TAG, TagsInit.ItemTagsInit.PRISMALLON_BLOCK_TAG);
+        copy(TagsInit.Blocks.PRISMALLON_BLOCK_TAG, TagsInit.Items.PRISMALLON_BLOCK_TAG);
 
-        tag(TagsInit.ItemTagsInit.PRISMALLON_INGOT_TAG).add(ItemInit.PRISMALLON_INGOT.get());
+        tag(TagsInit.Items.PRISMALLON_INGOT_TAG).add(ItemInit.PRISMALLON_INGOT.get());
 
         // Hypothetical tag
         // tag(ItemTags.TRIMMABLE_ARMOR

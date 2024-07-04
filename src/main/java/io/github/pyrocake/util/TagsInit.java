@@ -30,7 +30,7 @@ public class TagsInit {
         return TagKey.create(BuiltInRegistries.BLOCK.key(), ResourceLocation.fromNamespaceAndPath(Radiant.MOD_ID, name));
     }
 
-    public static class ItemTagsInit {
+    public static class Items {
         //Items
         public static final TagKey<Item> PRISMALLON_INGOT_TAG = ItemTags.create(createGenericItemsLocation("prismallon_ingot"));
 
@@ -38,7 +38,7 @@ public class TagsInit {
         public static final TagKey<Item> PRISMALLON_BLOCK_TAG = ItemTags.create(createBlockLocation("prismallon_block"));
     }
 
-    public static class BlockTagsInit {
+    public static class Blocks {
         public static final TagKey<Block> PRISMALLON_BLOCK_TAG =
                 BlockTags.create(createBlockLocation("prismallon_block"));
     }
