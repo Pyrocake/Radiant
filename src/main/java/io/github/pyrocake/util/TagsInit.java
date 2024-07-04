@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/main/java/io/github/pyrocake/util/TagsInit.java
 package io.github.pyrocake.util;
+========
+package io.github.pyrocake.tag;
+>>>>>>>> origin/main:src/main/java/io/github/pyrocake/tag/TagsInit.java
 
 import io.github.pyrocake.Radiant;
 import net.minecraft.core.registries.BuiltInRegistries;
