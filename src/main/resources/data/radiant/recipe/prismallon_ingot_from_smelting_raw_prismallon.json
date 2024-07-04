@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.9,
+  "group": "prismallon_ingot",
+  "ingredient": {
+    "item": "radiant:raw_prismallon"
+  },
+  "result": {
+    "id": "radiant:prismallon_ingot"
+  }
+}

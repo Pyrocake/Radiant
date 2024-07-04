@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "radiant:prismallon_ingot"
+    }
+  ],
+  "result": {
+    "id": "radiant:prismallon_nugget",
+    "count": 9
+  }
+}
