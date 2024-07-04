@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "prismallon_ingot",
   "ingredients": [
     {
       "item": "radiant:prismallon_block"
