@@ -1,5 +1,6 @@
 package io.github.pyrocake;
 
+import io.github.pyrocake.block.entity.ModBlockEntities;
 import io.github.pyrocake.data.DataGenerators;
 import io.github.pyrocake.block.ModBlocks;
 import io.github.pyrocake.item.CreativeModeTabInit;
@@ -21,6 +22,8 @@ public class Radiant {
         ModItems.ITEMS.register(bus);
         ModBlocks.BLOCKS.register(bus);
         CreativeModeTabInit.CREATIVE_MODE_TABS.register(bus);
+
+        ModBlockEntities.register(bus);
 
         bus.addListener(DataGenerators::gatherData);
 
