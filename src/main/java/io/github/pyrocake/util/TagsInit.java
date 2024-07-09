@@ -34,12 +34,22 @@ public class TagsInit {
         //Items
         public static final TagKey<Item> PRISMALLON_INGOT_TAG = ItemTags.create(createGenericItemsLocation("prismallon_ingot"));
 
+        public static final TagKey<Item> RAW_TAG = ItemTags.create(createRawItemsLocation("raw_prismallon"));
+
         //Blocks
         public static final TagKey<Item> PRISMALLON_BLOCK_TAG = ItemTags.create(createBlockLocation("prismallon_block"));
+
+        public static final TagKey<Item> ORE_TAG = ItemTags.create(createOreLocation("prismallon_ore"));
+        public static final TagKey<Item> DEEPSLATE_ORE_TAG = ItemTags.create(createOreLocation("deepslate_prismallon_ore"));
+
     }
 
     public static class Blocks {
         public static final TagKey<Block> PRISMALLON_BLOCK_TAG =
                 BlockTags.create(createBlockLocation("prismallon_block"));
+        public static final TagKey<Block> PRISMALLON_ORE_TAG =
+                BlockTags.create(createOreLocation("prismallon_ore"));
+        public static final TagKey<Block> DEEPSLATE_PRISMALLON_ORE_TAG =
+                BlockTags.create(createOreLocation("deepslate_prismallon_ore"));
     }
 }

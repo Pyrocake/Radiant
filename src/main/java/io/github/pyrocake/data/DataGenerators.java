@@ -8,6 +8,7 @@ import io.github.pyrocake.data.tag.ModBlockTagsProvider;
 import io.github.pyrocake.data.tag.ModItemTagProvider;
 import io.github.pyrocake.data.texture.ModBlockStateProvider;
 import io.github.pyrocake.data.texture.ModItemStateProvider;
+import io.github.pyrocake.data.worldgen.ModWorldGenProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -33,6 +34,9 @@ public class DataGenerators {
             generator.addProvider(true, new ModItemTagProvider(output, event.getLookupProvider(), modBlockTagsProvider, existingFileHelper));
             generator.addProvider(true, new ModLootTables(output, event.getLookupProvider()));
             generator.addProvider(true, new ModRecipeProvider(output, lookupProvider));
+            Radiant.logger.info("World Gen Starting");
+            generator.addProvider(true, new ModWorldGenProvider(output, lookupProvider));
+            Radiant.logger.info("World Gen Done");
         } catch (RuntimeException e) {
             Radiant.logger.error("Failed to get data", e);
         }

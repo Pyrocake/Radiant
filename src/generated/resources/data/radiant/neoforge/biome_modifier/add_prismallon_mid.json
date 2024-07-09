@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "radiant:prismallon_ore_mid",
+  "step": "underground_ores"
+}

@@ -83,7 +83,6 @@ public class Sun_Block extends BaseEntityBlock {
     private static void updateSignalStrength(BlockState state, Level level, BlockPos pos) {
         int i = level.getBrightness(LightLayer.SKY, pos) - level.getSkyDarken();
         float f = level.getSunAngle(1.0F);
-        boolean flag = false;
         if (!level.canSeeSky(pos)) {
             i = 0;
         } else if (i > 0) {

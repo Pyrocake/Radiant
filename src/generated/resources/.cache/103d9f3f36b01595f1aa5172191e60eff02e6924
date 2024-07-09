@@ -1,0 +1,8 @@
+// 1.21	2024-07-08T21:53:25.8455055	Registries
+9e871eb94bccf76418a32c340e56d51b43b39dc9 data/radiant/neoforge/biome_modifier/add_prismallon_high.json
+e83e64b92dae41021b28a2989688dbb454c80884 data/radiant/neoforge/biome_modifier/add_prismallon_low.json
+645ee03990003fb10275a7fa185df7ca0455f7fe data/radiant/neoforge/biome_modifier/add_prismallon_mid.json
+5943b8d7b4bb4f027f6532751eeb9afdf681a0b8 data/radiant/worldgen/configured_feature/prismallon_ore.json
+5692516d9857db2f26133264991540c6a8105904 data/radiant/worldgen/placed_feature/prismallon_ore_high.json
+aad0fd420d2b1df2c507276b58da337f1adea03c data/radiant/worldgen/placed_feature/prismallon_ore_low.json
+552c1911c8dec39fa7db47ff68fc69e199c88d24 data/radiant/worldgen/placed_feature/prismallon_ore_mid.json

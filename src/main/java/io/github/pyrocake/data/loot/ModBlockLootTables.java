@@ -22,10 +22,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        dropSelf(ModBlocks.PRISMALLON_BLOCK.get());
-        dropSelf(ModBlocks.RAW_PRISMALLON_BLOCK.get());
         add(ModBlocks.PRISMALLON_ORE_BLOCK.get(), block -> createOreDrop(ModBlocks.PRISMALLON_ORE_BLOCK.get(), ModItems.RAW_PRISMALLON.get()));
         add(ModBlocks.DEEPSLATE_PRISMALLON_ORE_BLOCK.get(), block -> createOreDrop(ModBlocks.DEEPSLATE_PRISMALLON_ORE_BLOCK.get(), ModItems.RAW_PRISMALLON.get()));
+        dropSelf(ModBlocks.RAW_PRISMALLON_BLOCK.get());
+        dropSelf(ModBlocks.PRISMALLON_BLOCK.get());
         dropSelf(ModBlocks.SUN_BLOCK.get());
     }
 
