@@ -1,4 +1,5 @@
-// 1.21	2024-07-04T05:52:32.8027487	Loot Tables
+// 1.21	2024-07-11T15:56:49.1056636	Loot Tables
+2a27d19fae10d83c763b17ddd74ae34bcc27c918 data/radiant/loot_table/blocks/connector_block.json
 b602adb4d829e867ca4732561d9bdfa28a4ce6dd data/radiant/loot_table/blocks/deepslate_prismallon_ore.json
 9daa1059e787153d1504d8388d11fcfb81071a64 data/radiant/loot_table/blocks/prismallon_block.json
 589799e79721b4710e4f1237d34406071d809a2e data/radiant/loot_table/blocks/prismallon_ore.json

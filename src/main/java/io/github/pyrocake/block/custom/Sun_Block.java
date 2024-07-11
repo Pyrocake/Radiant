@@ -1,13 +1,13 @@
 package io.github.pyrocake.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import io.github.pyrocake.Radiant;
 import io.github.pyrocake.block.entity.ModBlockEntities;
 import io.github.pyrocake.block.entity.SunBlockBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.OutgoingChatMessage;
+import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +24,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -73,10 +72,13 @@ public class Sun_Block extends BaseEntityBlock {
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
-    // Test Behavior
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        level.playSound(player, pos, SoundEvents.ARROW_SHOOT, SoundSource.BLOCKS, 1f, 1f);
+        if (level.isClientSide()) {
+            PlayerChatMessage message = PlayerChatMessage.unsigned(player.getUUID(), "Power: " + (Integer)state.getValue(POWER));
+            player.createCommandSourceStack().sendChatMessage(OutgoingChatMessage.create(message), false, ChatType.bind(ChatType.CHAT, player));
+        }
+        //level.playSound(player, pos, SoundEvents.ARROW_SHOOT, SoundSource.BLOCKS, 1f, 1f);
         return InteractionResult.SUCCESS;
     }
 

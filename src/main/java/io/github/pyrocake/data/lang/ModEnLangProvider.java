@@ -25,6 +25,8 @@ public class ModEnLangProvider extends LanguageProvider {
         addBlock(ModBlocks.PRISMALLON_ORE_BLOCK, "Prismallon Ore");
         addBlock(ModBlocks.DEEPSLATE_PRISMALLON_ORE_BLOCK, "Deepslate Prismallon Ore");
 
+        addBlock(ModBlocks.CONNECTOR_BLOCK, "Connection Tester WIP");
+
         addBlock(ModBlocks.SUN_BLOCK, "Sun Block WIP");
 
         //Misc

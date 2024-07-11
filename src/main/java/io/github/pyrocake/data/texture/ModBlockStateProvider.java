@@ -22,6 +22,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         standardBlock(ModBlocks.RAW_PRISMALLON_BLOCK.get());
         standardBlock(ModBlocks.PRISMALLON_ORE_BLOCK.get());
         standardBlock(ModBlocks.DEEPSLATE_PRISMALLON_ORE_BLOCK.get());
+        standardBlock(ModBlocks.CONNECTOR_BLOCK.get());
 
         simpleBlock(ModBlocks.SUN_BLOCK.get(), new ModelFile.UncheckedModelFile(modLoc("block/sun_block")));
     }

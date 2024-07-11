@@ -10,7 +10,6 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Modifier;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,6 +26,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.RAW_PRISMALLON_BLOCK.get());
         dropSelf(ModBlocks.PRISMALLON_BLOCK.get());
         dropSelf(ModBlocks.SUN_BLOCK.get());
+        dropSelf(ModBlocks.CONNECTOR_BLOCK.get());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package io.github.pyrocake.block;
 
 import io.github.pyrocake.Radiant;
+import io.github.pyrocake.block.custom.Connector_Block;
 import io.github.pyrocake.block.custom.Sun_Block;
 import io.github.pyrocake.item.ModItems;
 import net.minecraft.world.item.BlockItem;
@@ -21,6 +22,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PRISMALLON_ORE_BLOCK = registerBlock("prismallon_ore", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
     public static final DeferredBlock<Block> DEEPSLATE_PRISMALLON_ORE_BLOCK = registerBlock("deepslate_prismallon_ore", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE)));
     public static final DeferredBlock<Block> SUN_BLOCK = registerBlock("sun_block", () -> new Sun_Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion()));
+    public static final DeferredBlock<Block> CONNECTOR_BLOCK = registerBlock("connector_block", () -> new Connector_Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
 
     public static DeferredBlock<Block> registerBlock(String name, Supplier<Block> block) {

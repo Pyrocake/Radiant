@@ -16,6 +16,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("sun_block_be", () ->
                     BlockEntityType.Builder.of(SunBlockBlockEntity::new,
                             ModBlocks.SUN_BLOCK.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ConnectorBlockEntity>> CONNECTOR_BE =
+            BLOCK_ENTITIES.register("connector_be", () ->
+                    BlockEntityType.Builder.of(ConnectorBlockEntity::new,
+                            ModBlocks.CONNECTOR_BLOCK.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
