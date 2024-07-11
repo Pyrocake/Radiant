@@ -6,11 +6,16 @@ import io.github.pyrocake.block.entity.ModBlockEntities;
 import io.github.pyrocake.block.entity.SunBlockBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.OutgoingChatMessage;
+import net.minecraft.network.chat.PlayerChatMessage;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.PlayerEnderChestContainer;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
@@ -28,7 +33,11 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.apache.logging.log4j.core.util.UuidUtil;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.MixinEnvironment;
+
+import java.util.UUID;
 
 public class Sun_Block extends BaseEntityBlock {
     public static final VoxelShape SHAPE = Block.box(0, 0,0,16,12,16);
@@ -73,10 +82,13 @@ public class Sun_Block extends BaseEntityBlock {
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
-    // Test Behavior
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        level.playSound(player, pos, SoundEvents.ARROW_SHOOT, SoundSource.BLOCKS, 1f, 1f);
+        if (level.isClientSide()) {
+            PlayerChatMessage message = PlayerChatMessage.unsigned(player.getUUID(), "Clicked.");
+            player.createCommandSourceStack().sendChatMessage(OutgoingChatMessage.create(message), false, ChatType.bind(ChatType.CHAT, player));
+        }
+        //level.playSound(player, pos, SoundEvents.ARROW_SHOOT, SoundSource.BLOCKS, 1f, 1f);
         return InteractionResult.SUCCESS;
     }
 
