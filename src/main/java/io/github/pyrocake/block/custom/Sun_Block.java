@@ -78,7 +78,6 @@ public class Sun_Block extends BaseEntityBlock {
             PlayerChatMessage message = PlayerChatMessage.unsigned(player.getUUID(), "Power: " + (Integer)state.getValue(POWER));
             player.createCommandSourceStack().sendChatMessage(OutgoingChatMessage.create(message), false, ChatType.bind(ChatType.CHAT, player));
         }
-        //level.playSound(player, pos, SoundEvents.ARROW_SHOOT, SoundSource.BLOCKS, 1f, 1f);
         return InteractionResult.SUCCESS;
     }
 
