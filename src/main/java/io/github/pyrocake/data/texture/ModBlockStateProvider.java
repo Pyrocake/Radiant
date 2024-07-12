@@ -6,6 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.PipeBlock;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -23,7 +24,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         standardBlock(ModBlocks.PRISMALLON_ORE_BLOCK.get());
         standardBlock(ModBlocks.DEEPSLATE_PRISMALLON_ORE_BLOCK.get());
         standardBlock(ModBlocks.CONNECTOR_BLOCK.get());
-
         simpleBlock(ModBlocks.SUN_BLOCK.get(), new ModelFile.UncheckedModelFile(modLoc("block/sun_block")));
     }
 

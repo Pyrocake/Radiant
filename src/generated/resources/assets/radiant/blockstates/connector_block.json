@@ -1,7 +1,67 @@
 {
-  "variants": {
-    "": {
-      "model": "radiant:block/connector_block"
+  "multipart": [
+    {
+      "apply": {
+        "model": "radiant:block/connector_side"
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "radiant:block/connector_side",
+        "uvlock": false,
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "radiant:block/connector_side",
+        "uvlock": false,
+        "y": 180
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "radiant:block/connector_side",
+        "uvlock": false,
+        "y": 270
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "radiant:block/connector_side",
+        "uvlock": false,
+        "x": 270
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "radiant:block/connector_side",
+        "uvlock": false,
+        "x": 90
+      },
+      "when": {
+        "down": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "radiant:block/connector_core"
+      }
     }
-  }
+  ]
 }

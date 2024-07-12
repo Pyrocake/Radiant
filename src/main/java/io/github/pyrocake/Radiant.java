@@ -5,6 +5,8 @@ import io.github.pyrocake.data.DataGenerators;
 import io.github.pyrocake.block.ModBlocks;
 import io.github.pyrocake.item.CreativeModeTabInit;
 import io.github.pyrocake.item.ModItems;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
@@ -31,6 +33,7 @@ public class Radiant {
             fmlClientSetupEvent.enqueueWork(() -> {
                 ModList.get().getModContainerById(MOD_ID).ifPresent(modContainer -> {
                     logger.info("Waking up the sun, version: {}", modContainer.getModInfo().getVersion());
+                    ItemBlockRenderTypes.setRenderLayer(ModBlocks.CONNECTOR_BLOCK.get(), RenderType.cutout());
                 });
             });
         }));

@@ -23,7 +23,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PRISMALLON_ORE_BLOCK = registerBlock("prismallon_ore", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
     public static final DeferredBlock<Block> DEEPSLATE_PRISMALLON_ORE_BLOCK = registerBlock("deepslate_prismallon_ore", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE)));
     public static final DeferredBlock<Block> SUN_BLOCK = registerBlock("sun_block", () -> new Sun_Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion()));
-    public static final DeferredBlock<Block> CONNECTOR_BLOCK = registerBlock("connector_block", () -> new Connector_Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+    public static final DeferredBlock<Block> CONNECTOR_BLOCK = registerBlock("connector_block", () -> new Connector_Block(0.5f, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion()));
 
 
     public static DeferredBlock<Block> registerBlock(String name, Supplier<Block> block) {
