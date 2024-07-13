@@ -2,13 +2,8 @@ package io.github.pyrocake.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import io.github.pyrocake.block.ModBlocks;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.ChatType;
-import net.minecraft.network.chat.OutgoingChatMessage;
-import net.minecraft.network.chat.PlayerChatMessage;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -17,13 +12,21 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.util.TriState;
 import org.jetbrains.annotations.Nullable;
 
 public class Connector_Block extends PipeBlock implements EntityBlock {
+    public static final VoxelShape CORE = Block.box(5, 5,5,11,11,11);
+    public static final VoxelShape N = Block.box(5, 5, 0, 11, 11, 5);
+    public static final VoxelShape E = Block.box(11, 5, 5, 16, 11, 11);
+    public static final VoxelShape S = Block.box(5, 5, 11, 11, 11, 16);
+    public static final VoxelShape W = Block.box(0, 5, 5, 5, 11, 11);
+    public static final VoxelShape U = Block.box(5, 11, 5, 11, 16, 11);
+    public static final VoxelShape D = Block.box(5, 0, 5, 11, 5, 11);
+
     public Connector_Block(float apothem, Properties properties) {
         super(apothem, properties);
 
@@ -37,11 +40,6 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
                 .setValue(DOWN, false));
 
     }
-
-//    @Override
-//    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-//        return super.getCollisionShape(state, level, pos, context);
-//    }
 
     protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
         if (false) {
@@ -61,13 +59,38 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
 //
 //        }
 
-        getStateWithConnections(level, pos, state);
+        //getStateWithConnections(level, pos, state);
 
     }
 
 //    protected boolean useShapeForLightOcclusion(BlockState state) {
 //        return true;
 //    }
+
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        VoxelShape SHAPE = CORE;
+        if (state.getValue(NORTH)){
+            SHAPE = Shapes.join(SHAPE, N, BooleanOp.OR);
+        }
+        if (state.getValue(EAST)){
+            SHAPE = Shapes.join(SHAPE, E, BooleanOp.OR);
+        }
+        if (state.getValue(SOUTH)){
+            SHAPE = Shapes.join(SHAPE, S, BooleanOp.OR);
+        }
+        if (state.getValue(WEST)){
+            SHAPE = Shapes.join(SHAPE, W, BooleanOp.OR);
+        }
+        if (state.getValue(UP)){
+            SHAPE = Shapes.join(SHAPE, U, BooleanOp.OR);
+        }
+        if (state.getValue(DOWN)){
+            SHAPE = Shapes.join(SHAPE, D, BooleanOp.OR);
+        }
+        return SHAPE;
+    }
 
     public static BlockState getStateWithConnections(BlockGetter level, BlockPos pos, BlockState state) {
         BlockState blockstate = level.getBlockState(pos.below());
