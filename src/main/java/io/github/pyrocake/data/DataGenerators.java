@@ -9,7 +9,6 @@ import io.github.pyrocake.data.tag.ModItemTagProvider;
 import io.github.pyrocake.data.texture.ModBlockStateProvider;
 import io.github.pyrocake.data.texture.ModItemStateProvider;
 import io.github.pyrocake.data.worldgen.ModWorldGenProvider;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
