@@ -1,0 +1,11 @@
+{
+    "name": "Getting Started",
+    "icon": "minecraft:iron_pickaxe",
+    "category": "radiant:getting_started",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "This is a test entry, but it should show up!"
+        }
+    ]
+}
