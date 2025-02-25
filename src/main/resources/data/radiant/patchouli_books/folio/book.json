@@ -1,7 +1,9 @@
 {
     "name": "The Photonic Folio",
-    "landing_text": "Your guide to the solar arts",
-    "version": 3,
+    "landing_text": "Your guide to the solar arts!",
+    "version": 7,
     "creative_tab": "radiant:radiant_tab",
+    "book_texture": "patchouli:textures/gui/book_blue.png",
+    "model": "radiant:folio_blue",
     "use_resource_pack": true
 }

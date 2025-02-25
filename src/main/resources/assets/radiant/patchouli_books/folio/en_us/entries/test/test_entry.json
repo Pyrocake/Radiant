@@ -1,11 +1,17 @@
 {
-    "name": "Getting Started",
+    "name": "Mining Ore",
     "icon": "minecraft:iron_pickaxe",
     "category": "radiant:getting_started",
     "pages": [
         {
-            "type": "patchouli:text",
-            "text": "This is a test entry, but it should show up!"
+            "type": "patchouli:spotlight",
+            "item": "radiant:prismallon_ore",
+            "text": "Can be mined with an iron pickaxe. More common than the deepslate variant."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "radiant:deepslate_prismallon_ore",
+            "text": "Less common than stone variant."
         }
     ]
 }
