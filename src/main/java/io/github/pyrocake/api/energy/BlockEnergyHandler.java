@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.energy.EnergyStorage;
 
 public class BlockEnergyHandler extends BlockEntity implements ILightEnergyReciever, ILightEnergyProvider {
-
+    //TODO LEARN HOW THIS WORKS
     protected EnergyStorage storage = new EnergyStorage(32000);
 
     public BlockEnergyHandler(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
