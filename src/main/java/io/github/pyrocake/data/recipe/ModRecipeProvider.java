@@ -11,21 +11,19 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.conditions.NeoForgeConditions;
-
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class ModRecipeProvider extends CraftingHelper {
+public class ModRecipeProvider extends RecipeProvider {
+    public ModRecipeProvider(CompletableFuture<HolderLookup.Provider> registries, PackOutput output) {
+        super((HolderLookup.Provider) registries, (RecipeOutput) output);
+    }
+
     private static final List<ItemLike> PRISMALLON_SMELTABLES = List.of(ModItems.RAW_PRISMALLON.get(),
             ModBlocks.PRISMALLON_ORE_BLOCK.get(),
             ModBlocks.DEEPSLATE_PRISMALLON_ORE_BLOCK.get());
-
-    public ModRecipeProvider(RecipeOutput output, HolderLookup.Provider provider) {
-        super(output, provider);
-    }
 
     @Override
     protected void buildRecipes() {

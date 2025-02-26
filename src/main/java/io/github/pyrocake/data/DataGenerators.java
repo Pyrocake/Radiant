@@ -12,6 +12,7 @@ import io.github.pyrocake.data.worldgen.ModWorldGenProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.server.packs.PackType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -27,18 +28,25 @@ public class DataGenerators {
             DataGenerator generator = event.getGenerator();
             PackOutput output = generator.getPackOutput();
             CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+            HolderLookup.Provider provider = null;
 
             generator.addProvider(true, new ModEnLangProvider(output));
+
             //generator.addProvider(true, new ModItemStateProvider(output));
             generator.addProvider(true, new ModBlockStateProvider(output));
+
             ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(output, lookupProvider);
             generator.addProvider(true, modBlockTagsProvider);
             generator.addProvider(true, new ModItemTagProvider(output, event.getLookupProvider(), modBlockTagsProvider));
+
             generator.addProvider(true, new ModLootTables(output, lookupProvider));
-            //generator.addProvider(true, new ModRecipeProvider(output, lookupProvider));
+
+            //generator.addProvider(true, new ModRecipeProvider(lookupProvider, output));
+
             Radiant.logger.info("World Gen Starting");
             generator.addProvider(true, new ModWorldGenProvider(output, lookupProvider));
             Radiant.logger.info("World Gen Done");
+
         } catch (RuntimeException e) {
             Radiant.logger.error("Failed to get data", e);
         }
