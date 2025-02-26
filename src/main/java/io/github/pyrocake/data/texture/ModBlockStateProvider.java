@@ -2,9 +2,11 @@ package io.github.pyrocake.data.texture;
 
 import io.github.pyrocake.Radiant;
 import io.github.pyrocake.block.ModBlocks;
+import io.github.pyrocake.item.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -25,5 +27,11 @@ public class ModBlockStateProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.CONNECTOR_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.SUN_BLOCK.get());
         //simpleBlock(ModBlocks.SUN_BLOCK.get(), new ModelFile.UncheckedModelFile(modLoc("block/sun_block")));
+
+
+        //Items
+        itemModels.generateFlatItem(ModItems.PRISMALLON_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RAW_PRISMALLON.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.PRISMALLON_NUGGET.get(), ModelTemplates.FLAT_ITEM);
+        }
     }
-}

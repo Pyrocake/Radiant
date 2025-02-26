@@ -29,7 +29,7 @@ public class DataGenerators {
             CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
             generator.addProvider(true, new ModEnLangProvider(output));
-            generator.addProvider(true, new ModItemStateProvider(output));
+            //generator.addProvider(true, new ModItemStateProvider(output));
             generator.addProvider(true, new ModBlockStateProvider(output));
             ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(output, lookupProvider);
             generator.addProvider(true, modBlockTagsProvider);

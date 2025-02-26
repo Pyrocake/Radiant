@@ -11,18 +11,9 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 
-public class ModItemStateProvider extends ModelProvider {
-    public ModItemStateProvider(PackOutput output) {
-        super(output, Radiant.MOD_ID);
-    }
+public class ModItemStateProvider {
 
-    @Override
-    protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        itemModels.generateFlatItem(ModItems.PRISMALLON_INGOT.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.RAW_PRISMALLON.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.PRISMALLON_NUGGET.get(), ModelTemplates.FLAT_ITEM);
-    }
-
+    //TODO learn how to split from blocks
     private void item(Item item) {
         String name = GenHandler.getItemName(item);
         //getBuilder(name)
