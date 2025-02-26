@@ -12,8 +12,8 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
-    public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, Radiant.MOD_ID, exFileHelper);
+    public ModBlockStateProvider(PackOutput output) {
+        super(output, Radiant.MOD_ID);
     }
 
     @Override

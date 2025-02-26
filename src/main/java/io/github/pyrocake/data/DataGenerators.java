@@ -12,27 +12,31 @@ import io.github.pyrocake.data.worldgen.ModWorldGenProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.server.packs.PackType;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
+@EventBusSubscriber(modid = Radiant.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
-    public static void gatherData(GatherDataEvent event) {
+    @SubscribeEvent
+    public static void gatherData(GatherDataEvent.Client event) {
         try {
             DataGenerator generator = event.getGenerator();
             PackOutput output = generator.getPackOutput();
-            ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+            //ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
             CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
             generator.addProvider(true, new ModEnLangProvider(output));
-            generator.addProvider(true, new ModItemStateProvider(output, existingFileHelper));
-            generator.addProvider(true, new ModBlockStateProvider(output, existingFileHelper));
-            ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(output, event.getLookupProvider(), existingFileHelper);
+            //generator.addProvider(true, new ModItemStateProvider(output, event.getResourceManager(PackType.SERVER_DATA)));
+            //generator.addProvider(true, new ModBlockStateProvider(output, existingFileHelper));
+            ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(output, lookupProvider);
             generator.addProvider(true, modBlockTagsProvider);
-            generator.addProvider(true, new ModItemTagProvider(output, event.getLookupProvider(), modBlockTagsProvider, existingFileHelper));
+            generator.addProvider(true, new ModItemTagProvider(output, event.getLookupProvider(), modBlockTagsProvider));
             generator.addProvider(true, new ModLootTables(output, event.getLookupProvider()));
-            generator.addProvider(true, new ModRecipeProvider(output, lookupProvider));
+            //generator.addProvider(true, new ModRecipeProvider(output, lookupProvider));
             Radiant.logger.info("World Gen Starting");
             generator.addProvider(true, new ModWorldGenProvider(output, lookupProvider));
             Radiant.logger.info("World Gen Done");
