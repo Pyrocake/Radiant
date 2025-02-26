@@ -1,4 +1,4 @@
-// 1.21	2024-07-08T16:53:27.466293	Tags for minecraft:block mod id radiant
+// 1.21.4	2025-02-26T03:55:47.3323134	Tags for minecraft:block mod id radiant
 c03875464f9b84fc2a8707c57443c001c7cdc08f data/c/tags/block/ores.json
 ae2839d836b3adb2c873b9bc2f8eb52266915bec data/minecraft/tags/block/mineable/pickaxe.json
 0173c925fc329b2ad16dbbf153b69ff56944f9a0 data/minecraft/tags/block/needs_iron_tool.json

@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -44,16 +45,17 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
     protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
         if (false) {
             level.scheduleTick(currentPos, this, 1);
-            return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+            boolean flag = facingState.is(this) || facingState.is(ModBlocks.CONNECTOR_BLOCK);
+            return (BlockState)state.setValue((Property)PROPERTY_BY_DIRECTION.get(facing), flag);
+            //return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
         } else {
             boolean flag = facingState.is(this) || facingState.is(ModBlocks.CONNECTOR_BLOCK);
             return (BlockState)state.setValue((Property)PROPERTY_BY_DIRECTION.get(facing), flag);
         }
     }
 
-    @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
-        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, Orientation direction, boolean movedByPiston) {
+        super.neighborChanged(state, level, pos, neighborBlock, direction, movedByPiston);
 
 //        if (level.getBlockState(neighborPos).getBlock() == ModBlocks.CONNECTOR_BLOCK.get()) {
 //

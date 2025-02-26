@@ -76,7 +76,7 @@ public class Sun_Block extends BaseEntityBlock {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (level.isClientSide()) {
             PlayerChatMessage message = PlayerChatMessage.unsigned(player.getUUID(), "Power: " + (Integer)state.getValue(POWER));
-            player.createCommandSourceStack().sendChatMessage(OutgoingChatMessage.create(message), false, ChatType.bind(ChatType.CHAT, player));
+            //player.createCommandSourceStack().sendChatMessage(OutgoingChatMessage.create(message), false, ChatType.bind(ChatType.CHAT, player));
         }
         return InteractionResult.SUCCESS;
     }
@@ -99,10 +99,10 @@ public class Sun_Block extends BaseEntityBlock {
         //Radiant.logger.info("{}", i);
     }
 
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return !level.isClientSide && level.dimensionType().hasSkyLight() ? createTickerHelper(blockEntityType, ModBlockEntities.SUN_BLOCK_BE.get(), Sun_Block::tickEntity) : null;
-    }
+    //@Nullable
+    //public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+    //    return !level.isClientSide && level.dimensionType().hasSkyLight() ? createTickerHelper(blockEntityType, ModBlockEntities.SUN_BLOCK_BE.get(), Sun_Block::tickEntity) : null;
+    //}
 
     private static void tickEntity(Level level, BlockPos pos, BlockState state, SunBlockBlockEntity blockEntity) {
         if (level.getGameTime() % 20L == 0L) {
