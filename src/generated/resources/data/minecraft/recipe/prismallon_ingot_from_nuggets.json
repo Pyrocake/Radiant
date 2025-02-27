@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "prismallon_ingot",
+  "key": {
+    "#": "radiant:prismallon_nugget"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "radiant:prismallon_ingot"
+  }
+}

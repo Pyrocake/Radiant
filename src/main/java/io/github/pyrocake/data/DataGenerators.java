@@ -3,17 +3,14 @@ package io.github.pyrocake.data;
 import io.github.pyrocake.Radiant;
 import io.github.pyrocake.data.lang.ModEnLangProvider;
 import io.github.pyrocake.data.loot.ModLootTables;
-import io.github.pyrocake.data.recipe.ModRecipeProvider;
+import io.github.pyrocake.data.recipe.ModRecipeRunner;
 import io.github.pyrocake.data.tag.ModBlockTagsProvider;
 import io.github.pyrocake.data.tag.ModItemTagProvider;
 import io.github.pyrocake.data.texture.ModBlockStateProvider;
-import io.github.pyrocake.data.texture.ModItemStateProvider;
 import io.github.pyrocake.data.worldgen.ModWorldGenProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.server.packs.PackType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -41,7 +38,7 @@ public class DataGenerators {
 
             generator.addProvider(true, new ModLootTables(output, lookupProvider));
 
-            //generator.addProvider(true, new ModRecipeProvider(lookupProvider, output));
+            generator.addProvider(true, new ModRecipeRunner(output, lookupProvider));
 
             Radiant.logger.info("World Gen Starting");
             generator.addProvider(true, new ModWorldGenProvider(output, lookupProvider));

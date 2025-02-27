@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "group": "prismallon_ingot",
+  "ingredient": "radiant:raw_prismallon",
+  "result": {
+    "count": 1,
+    "id": "radiant:prismallon_ingot"
+  }
+}

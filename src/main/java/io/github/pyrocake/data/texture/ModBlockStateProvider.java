@@ -20,6 +20,7 @@ public class ModBlockStateProvider extends ModelProvider {
     }
 
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+        //Blocks + BlockItems
         blockModels.createTrivialCube(ModBlocks.PRISMALLON_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.RAW_PRISMALLON_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.PRISMALLON_ORE_BLOCK.get());
@@ -27,7 +28,6 @@ public class ModBlockStateProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.CONNECTOR_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.SUN_BLOCK.get());
         //simpleBlock(ModBlocks.SUN_BLOCK.get(), new ModelFile.UncheckedModelFile(modLoc("block/sun_block")));
-
 
         //Items
         itemModels.generateFlatItem(ModItems.PRISMALLON_INGOT.get(), ModelTemplates.FLAT_ITEM);

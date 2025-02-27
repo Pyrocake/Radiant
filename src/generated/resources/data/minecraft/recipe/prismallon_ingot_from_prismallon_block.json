@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "prismallon_ingot",
+  "ingredients": [
+    "radiant:prismallon_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "radiant:prismallon_ingot"
+  }
+}
