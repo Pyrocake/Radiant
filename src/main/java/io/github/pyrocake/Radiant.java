@@ -1,5 +1,6 @@
 package io.github.pyrocake;
 
+import io.github.pyrocake.block.entity.ConnectorBlockEntity;
 import io.github.pyrocake.block.entity.ModBlockEntities;
 import io.github.pyrocake.data.DataGenerators;
 import io.github.pyrocake.block.ModBlocks;
@@ -17,6 +18,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.NotNull;

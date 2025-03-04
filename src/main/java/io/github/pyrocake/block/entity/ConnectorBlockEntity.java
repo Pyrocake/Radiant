@@ -8,6 +8,5 @@ import net.minecraft.world.level.block.state.BlockState;
 public class ConnectorBlockEntity extends BlockEntity {
     public ConnectorBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.CONNECTOR_BLOCK_ENTITY.get(), pos, blockState);
-        Radiant.logger.info("Entity created at: {}", pos);
     }
 }

@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.logging.Logger;
 
-public class Sun_Block extends Block implements EntityBlock {
+public class Sun_Block extends BaseEntityBlock implements EntityBlock {
     public static final VoxelShape SHAPE = Block.box(0, 0,0,16,12,16);
     public static final IntegerProperty POWER;
 
@@ -120,21 +120,5 @@ public class Sun_Block extends Block implements EntityBlock {
 
     static {
         POWER = BlockStateProperties.POWER;
-    }
-
-    @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
-        super.onPlace(state, level, pos, oldState, isMoving);
-
-        if (!level.isClientSide) {
-            Radiant.logger.info("Block placed at " + pos + ", checking for Block Entity...");
-            BlockEntity entity = level.getBlockEntity(pos);
-            if (entity == null) {
-                Radiant.logger.error("No Block Entity found at " + pos + ", trying to force creation...");
-                level.setBlockEntity(new SunBlockBlockEntity(pos, state));
-            } else {
-                Radiant.logger.info("Block Entity exists at " + pos);
-            }
-        }
     }
 }

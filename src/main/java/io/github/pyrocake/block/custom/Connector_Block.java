@@ -34,16 +34,15 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
     public static final VoxelShape W = Block.box(0, 5, 5, 5, 11, 11);
     public static final VoxelShape U = Block.box(5, 11, 5, 11, 16, 11);
     public static final VoxelShape D = Block.box(5, 0, 5, 11, 5, 11);
-//    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
-//    public static final BooleanProperty EAST = BlockStateProperties.EAST;
-//    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
-//    public static final BooleanProperty WEST = BlockStateProperties.WEST;
-//    public static final BooleanProperty UP = BlockStateProperties.UP;
-//    public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
+    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
+    public static final BooleanProperty EAST = BlockStateProperties.EAST;
+    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
+    public static final BooleanProperty WEST = BlockStateProperties.WEST;
+    public static final BooleanProperty UP = BlockStateProperties.UP;
+    public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
 
-    public Connector_Block(float apothem, Properties properties) {
-        super(apothem, properties);
-
+    public Connector_Block(Properties properties) {
+        super(.5f, properties);
         this.registerDefaultState((BlockState)((BlockState)((BlockState)((BlockState)((BlockState)((BlockState)((BlockState)
                 this.stateDefinition.any())
                 .setValue(NORTH, false))
@@ -52,40 +51,20 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
                 .setValue(WEST, false))
                 .setValue(UP, false))
                 .setValue(DOWN, false));
-
     }
 
     protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos, ScheduledTickAccess access, RandomSource random) {
-        if (false) {
-            level.scheduleTick(currentPos, this, 1);
-            //boolean flag = facingState.is(this) || facingState.is(ModBlocks.CONNECTOR_BLOCK);
-            // (BlockState)state.setValue((Property)PROPERTY_BY_DIRECTION.get(facing), flag);
-            return super.updateShape(state, level, access, currentPos, facing, facingPos, facingState, random);
-        } else {
-            boolean flag = facingState.is(this) || facingState.is(ModBlocks.CONNECTOR_BLOCK);
-            return (BlockState)state.setValue((Property)PROPERTY_BY_DIRECTION.get(facing), flag);
-        }
+        boolean flag = facingState.is(this) || facingState.is(ModBlocks.CONNECTOR_BLOCK);
+        return state.setValue(PROPERTY_BY_DIRECTION.get(facing), flag);
     }
 
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, Orientation direction, boolean movedByPiston) {
         super.neighborChanged(state, level, pos, neighborBlock, direction, movedByPiston);
-
-//        if (level.getBlockState(neighborPos).getBlock() == ModBlocks.CONNECTOR_BLOCK.get()) {
-//
-//        }
-
-        //getStateWithConnections(level, pos, state);
-
     }
 
-//    protected boolean useShapeForLightOcclusion(BlockState state) {
-//        return true;
-//    }
-
-
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         VoxelShape SHAPE = CORE;
         if (state.getValue(NORTH)){
             SHAPE = Shapes.join(SHAPE, N, BooleanOp.OR);
@@ -129,10 +108,14 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
         return null;
     }
 
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return getStateWithConnections(context.getLevel(), context.getClickedPos(), this.defaultBlockState());
+    }
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        Radiant.logger.info("Entity created at: {}", blockPos);
         return new ConnectorBlockEntity(blockPos, blockState);
     }
 
