@@ -29,6 +29,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .addTag(TagsInit.Blocks.PRISMALLON_BLOCK_TAG)
                 .addTag(TagsInit.Blocks.PRISMALLON_ORE_TAG)
                 .addTag(TagsInit.Blocks.DEEPSLATE_PRISMALLON_ORE_TAG);
+        
         tag(Tags.Blocks.ORES)
                 .add(ModBlocks.PRISMALLON_ORE_BLOCK.get())
                 .add(ModBlocks.DEEPSLATE_PRISMALLON_ORE_BLOCK.get());

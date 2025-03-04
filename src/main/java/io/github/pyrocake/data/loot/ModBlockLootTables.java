@@ -8,6 +8,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -27,6 +28,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.PRISMALLON_BLOCK.get());
         dropSelf(ModBlocks.SUN_BLOCK.get());
         dropSelf(ModBlocks.CONNECTOR_BLOCK.get());
+        dropSelf(ModBlocks.SOLAR_OVEN_BLOCK.get());
     }
 
     @Override

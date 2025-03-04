@@ -7,6 +7,7 @@ import io.github.pyrocake.item.CreativeModeTabInit;
 import io.github.pyrocake.item.ModItems;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -32,7 +33,9 @@ public class Radiant {
         NeoForge.EVENT_BUS.register(this);
 
         ModItems.register(bus);
+
         ModBlocks.register(bus);
+
         CreativeModeTabInit.CREATIVE_MODE_TABS.register(bus);
 
         ModBlockEntities.register(bus);

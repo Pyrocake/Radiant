@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "radiant:block/solar_oven_block"
+    }
+  }
+}

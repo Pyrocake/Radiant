@@ -1,6 +1,7 @@
 package io.github.pyrocake.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import io.github.pyrocake.Radiant;
 import io.github.pyrocake.block.entity.ModBlockEntities;
 import io.github.pyrocake.block.entity.SunBlockBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -29,7 +31,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class Sun_Block extends BaseEntityBlock {
+import java.util.logging.Logger;
+
+public class Sun_Block extends Block implements EntityBlock {
     public static final VoxelShape SHAPE = Block.box(0, 0,0,16,12,16);
     public static final IntegerProperty POWER;
 
@@ -60,7 +64,6 @@ public class Sun_Block extends BaseEntityBlock {
         return null;
     }
 
-    @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new SunBlockBlockEntity(blockPos,  blockState);
@@ -75,8 +78,7 @@ public class Sun_Block extends BaseEntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (level.isClientSide()) {
-            PlayerChatMessage message = PlayerChatMessage.unsigned(player.getUUID(), "Power: " + (Integer)state.getValue(POWER));
-            //player.createCommandSourceStack().sendChatMessage(OutgoingChatMessage.create(message), false, ChatType.bind(ChatType.CHAT, player));
+            //PlayerChatMessage message = PlayerChatMessage.unsigned(player.getUUID(), "Power: " + (Integer)state.getValue(POWER));
         }
         return InteractionResult.SUCCESS;
     }
@@ -96,17 +98,19 @@ public class Sun_Block extends BaseEntityBlock {
         if ((Integer)state.getValue(POWER) != i) {
             level.setBlock(pos, (BlockState)state.setValue(POWER, i), 3);
         }
-        //Radiant.logger.info("{}", i);
+        Radiant.logger.info("{}", i);
     }
 
+    //@SuppressWarnings("unchecked")
     //@Nullable
     //public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-    //    return !level.isClientSide && level.dimensionType().hasSkyLight() ? createTickerHelper(blockEntityType, ModBlockEntities.SUN_BLOCK_BE.get(), Sun_Block::tickEntity) : null;
+     //   return !level.isClientSide && level.dimensionType().hasSkyLight() ? SunBlockBlockEntity::tickEntity : null;
     //}
 
-    private static void tickEntity(Level level, BlockPos pos, BlockState state, SunBlockBlockEntity blockEntity) {
+    private static void tick(Level level, BlockPos pos, BlockState state, SunBlockBlockEntity blockEntity) {
         if (level.getGameTime() % 20L == 0L) {
             updateSignalStrength(state, level, pos);
+            Radiant.logger.info("Power: {}", (Integer)state.getValue(POWER));
         }
     }
 
@@ -116,5 +120,21 @@ public class Sun_Block extends BaseEntityBlock {
 
     static {
         POWER = BlockStateProperties.POWER;
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        super.onPlace(state, level, pos, oldState, isMoving);
+
+        if (!level.isClientSide) {
+            Radiant.logger.info("Block placed at " + pos + ", checking for Block Entity...");
+            BlockEntity entity = level.getBlockEntity(pos);
+            if (entity == null) {
+                Radiant.logger.error("No Block Entity found at " + pos + ", trying to force creation...");
+                level.setBlockEntity(new SunBlockBlockEntity(pos, state));
+            } else {
+                Radiant.logger.info("Block Entity exists at " + pos);
+            }
+        }
     }
 }

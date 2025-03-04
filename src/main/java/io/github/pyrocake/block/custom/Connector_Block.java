@@ -1,16 +1,23 @@
 package io.github.pyrocake.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import io.github.pyrocake.Radiant;
 import io.github.pyrocake.block.ModBlocks;
+import io.github.pyrocake.block.entity.ConnectorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -27,6 +34,12 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
     public static final VoxelShape W = Block.box(0, 5, 5, 5, 11, 11);
     public static final VoxelShape U = Block.box(5, 11, 5, 11, 16, 11);
     public static final VoxelShape D = Block.box(5, 0, 5, 11, 5, 11);
+//    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
+//    public static final BooleanProperty EAST = BlockStateProperties.EAST;
+//    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
+//    public static final BooleanProperty WEST = BlockStateProperties.WEST;
+//    public static final BooleanProperty UP = BlockStateProperties.UP;
+//    public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
 
     public Connector_Block(float apothem, Properties properties) {
         super(apothem, properties);
@@ -42,18 +55,19 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
 
     }
 
-    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos, ScheduledTickAccess access, RandomSource random) {
         if (false) {
             level.scheduleTick(currentPos, this, 1);
-            boolean flag = facingState.is(this) || facingState.is(ModBlocks.CONNECTOR_BLOCK);
-            return (BlockState)state.setValue((Property)PROPERTY_BY_DIRECTION.get(facing), flag);
-            //return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+            //boolean flag = facingState.is(this) || facingState.is(ModBlocks.CONNECTOR_BLOCK);
+            // (BlockState)state.setValue((Property)PROPERTY_BY_DIRECTION.get(facing), flag);
+            return super.updateShape(state, level, access, currentPos, facing, facingPos, facingState, random);
         } else {
             boolean flag = facingState.is(this) || facingState.is(ModBlocks.CONNECTOR_BLOCK);
             return (BlockState)state.setValue((Property)PROPERTY_BY_DIRECTION.get(facing), flag);
         }
     }
 
+    @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, Orientation direction, boolean movedByPiston) {
         super.neighborChanged(state, level, pos, neighborBlock, direction, movedByPiston);
 
@@ -118,11 +132,12 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return null;
+        Radiant.logger.info("Entity created at: {}", blockPos);
+        return new ConnectorBlockEntity(blockPos, blockState);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{NORTH, EAST, SOUTH, WEST, UP, DOWN});
+        builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 
     @Override

@@ -27,6 +27,7 @@ public class ModBlockStateProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_PRISMALLON_ORE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.CONNECTOR_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.SUN_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.SOLAR_OVEN_BLOCK.get());
         //simpleBlock(ModBlocks.SUN_BLOCK.get(), new ModelFile.UncheckedModelFile(modLoc("block/sun_block")));
 
         //Items

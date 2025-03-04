@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "radiant:block/solar_oven_block"
+  }
+}
