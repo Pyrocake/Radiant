@@ -22,6 +22,11 @@ public class ModBlockEntities {
                     ConnectorBlockEntity::new,
                     ModBlocks.CONNECTOR_BLOCK.get()
             ));
+    public static final Supplier<BlockEntityType<SolarOvenBlockEntity>> SOLAR_OVEN_BLOCK_ENTITY = BLOCK_ENTITIES.register("solar_oven_block_entity",
+            () -> new BlockEntityType<>(
+                    SolarOvenBlockEntity::new,
+                    ModBlocks.SOLAR_OVEN_BLOCK.get()
+            ));
     //public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SunBlockBlockEntity>> SUN_BLOCK_BE = BLOCK_ENTITIES.register("sun_block_be", () -> new BlockEntityType<>(SunBlockBlockEntity::new, ModBlocks.SUN_BLOCK.get()));
     //public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ConnectorBlockEntity>> CONNECTOR_BE = BLOCK_ENTITIES.register("connector_be", () -> new BlockEntityType<>(ConnectorBlockEntity::new, ModBlocks.CONNECTOR_BLOCK.get()));
 

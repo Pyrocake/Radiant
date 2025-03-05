@@ -8,22 +8,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.apache.logging.log4j.core.config.Scheduled;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Connector_Block extends PipeBlock implements EntityBlock {
@@ -34,12 +30,12 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
     public static final VoxelShape W = Block.box(0, 5, 5, 5, 11, 11);
     public static final VoxelShape U = Block.box(5, 11, 5, 11, 16, 11);
     public static final VoxelShape D = Block.box(5, 0, 5, 11, 5, 11);
-    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
-    public static final BooleanProperty EAST = BlockStateProperties.EAST;
-    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
-    public static final BooleanProperty WEST = BlockStateProperties.WEST;
-    public static final BooleanProperty UP = BlockStateProperties.UP;
-    public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
+//    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
+//    public static final BooleanProperty EAST = BlockStateProperties.EAST;
+//    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
+//    public static final BooleanProperty WEST = BlockStateProperties.WEST;
+//    public static final BooleanProperty UP = BlockStateProperties.UP;
+//    public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
 
     public Connector_Block(Properties properties) {
         super(.5f, properties);
@@ -53,7 +49,8 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
                 .setValue(DOWN, false));
     }
 
-    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos, ScheduledTickAccess access, RandomSource random) {
+    @Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess access, BlockPos facingPos, Direction facing, BlockPos currentPos, BlockState facingState, RandomSource randomSource) {
         boolean flag = facingState.is(this) || facingState.is(ModBlocks.CONNECTOR_BLOCK);
         return state.setValue(PROPERTY_BY_DIRECTION.get(facing), flag);
     }
@@ -64,7 +61,7 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         VoxelShape SHAPE = CORE;
         if (state.getValue(NORTH)){
             SHAPE = Shapes.join(SHAPE, N, BooleanOp.OR);
