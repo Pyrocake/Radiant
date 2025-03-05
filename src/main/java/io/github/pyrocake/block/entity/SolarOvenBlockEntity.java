@@ -21,7 +21,7 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     private final int[] cookingTime;
 
 
-    public SolarOvenBlockEntity(BlockPos pos, BlockState blockState, NonNullList<ItemStack> items, int[] cookingProgress, int[] cookingTime) {
+    public SolarOvenBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_OVEN_BLOCK_ENTITY.get(), pos, blockState);
         this.items = NonNullList.withSize(4, ItemStack.EMPTY);
         this.cookingProgress = new int[4];
