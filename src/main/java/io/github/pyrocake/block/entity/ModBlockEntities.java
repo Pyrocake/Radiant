@@ -27,12 +27,8 @@ public class ModBlockEntities {
                     SolarOvenBlockEntity::new,
                     ModBlocks.SOLAR_OVEN_BLOCK.get()
             ));
-    //public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SunBlockBlockEntity>> SUN_BLOCK_BE = BLOCK_ENTITIES.register("sun_block_be", () -> new BlockEntityType<>(SunBlockBlockEntity::new, ModBlocks.SUN_BLOCK.get()));
-    //public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ConnectorBlockEntity>> CONNECTOR_BE = BLOCK_ENTITIES.register("connector_be", () -> new BlockEntityType<>(ConnectorBlockEntity::new, ModBlocks.CONNECTOR_BLOCK.get()));
-
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
-        //Radiant.logger.debug("ModBlockEntities done!");
     }
 }
