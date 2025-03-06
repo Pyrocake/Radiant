@@ -3,29 +3,37 @@ package io.github.pyrocake.block.entity;
 import io.github.pyrocake.Radiant;
 import io.github.pyrocake.block.custom.Solar_Oven_Block;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Clearable;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.GameMasterBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.Optional;
+
+import static io.github.pyrocake.block.custom.Solar_Oven_Block.INTENSITY;
 
 public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     private static final int NUM_SLOTS = 4;
     private final NonNullList<ItemStack> items;
-    private final int[] cookingProgress;
+    public final int[] cookingProgress;
     private final int[] cookingTime;
 
 
@@ -66,7 +74,8 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
             ItemStack itemStack = oven.items.get(i);
             if (!itemStack.isEmpty()) {
                 flag = true;
-                oven.cookingProgress[i]++;
+                int heat = state.getValue(INTENSITY);
+                oven.cookingProgress[i] += heat;
                 if (oven.cookingProgress[i] >= oven.cookingTime[i]) {
                     SingleRecipeInput singleRecipeInput = new SingleRecipeInput(itemStack);
                     ItemStack itemStack1 = cachedCheck.getRecipeFor(singleRecipeInput, level)
@@ -97,7 +106,7 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
                     return false;
                 }
 
-                this.cookingTime[i] = ((SmeltingRecipe)((RecipeHolder)optional.get()).value()).cookingTime();
+                this.cookingTime[i] = ((SmeltingRecipe)((RecipeHolder)optional.get()).value()).cookingTime() * 15;
                 this.cookingProgress[i] = 0;
                 this.items.set(i, itemStack.consumeAndReturn(1, livingEntity));
                 serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, this.getBlockPos(), GameEvent.Context.of(livingEntity, this.getBlockState()));
@@ -105,7 +114,6 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -121,5 +129,30 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
                 Solar_Oven_Block.makeParticles(level, blockPos, false, false);
             }
         }
+    }
+
+//    @Override
+//    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+//        super.loadAdditional(compoundTag, provider);
+//        this.items.clear();
+//        ContainerHelper.loadAllItems(compoundTag, this.items, provider);
+//        compoundTag.getIntArray("CookingTimes")
+//                .ifPresentOrElse(
+//                        is -> System.arraycopy(is, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, is.length)), () -> Arrays.fill(this.cookingProgress, 0)
+//                );
+//        compoundTag.getIntArray("CookingTotalTimes")
+//                .ifPresentOrElse(is -> System.arraycopy(is, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, is.length)), () -> Arrays.fill(this.cookingTime, 0));
+//    }
+//
+//    @Override
+//    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+//        super.saveAdditional(compoundTag, provider);
+//        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
+//        compoundTag.putIntArray("CookingTimes", this.cookingProgress);
+//        compoundTag.putIntArray("CookingTotalTimes", this.cookingTime);
+//    }
+
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }

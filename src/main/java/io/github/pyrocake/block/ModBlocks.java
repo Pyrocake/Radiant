@@ -31,7 +31,7 @@ public class ModBlocks {
     public static final DeferredBlock<Sun_Block> SUN_BLOCK = registerBlockWithItem("sun_block", Sun_Block::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
     public static final DeferredBlock<Connector_Block> CONNECTOR_BLOCK = registerBlockWithItem("connector_block", Connector_Block::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
 
-    public static final DeferredBlock<Solar_Oven_Block> SOLAR_OVEN_BLOCK = registerBlockWithItem("solar_oven_block", Solar_Oven_Block::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+    public static final DeferredBlock<Solar_Oven_Block> SOLAR_OVEN_BLOCK = registerBlockWithItem("solar_oven_block", Solar_Oven_Block::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
 
     public static <T extends Block> DeferredBlock<T> registerBlockWithItem(String name, Function<BlockBehaviour.Properties, T> block, Supplier<BlockBehaviour.Properties> properties) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, () -> block.apply(properties.get().setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Radiant.MOD_ID, name)))));

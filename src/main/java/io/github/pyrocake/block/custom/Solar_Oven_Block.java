@@ -10,13 +10,16 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -31,11 +34,16 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import static net.minecraft.client.renderer.LightTexture.getBrightness;
 
 public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static IntegerProperty INTENSITY = BlockStateProperties.POWER;
+    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 9.0, 16.0);
 
     public Solar_Oven_Block(Properties properties) {
         super(properties);
@@ -52,14 +60,9 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        if (level instanceof ServerLevel serverLevel) {
+        if (!level.isClientSide) {
             if (blockState.getValue(LIT)) {
-                RecipeManager.CachedCheck<SingleRecipeInput, SmeltingRecipe> cachedCheck = RecipeManager.createCheck(RecipeType.SMELTING);
-                return createTickerHelper(
-                        blockEntityType,
-                        ModBlockEntities.SOLAR_OVEN_BLOCK_ENTITY.get(),
-                        (levelx, blockPos, blockStatex, solarOvenBlockEntity) -> SolarOvenBlockEntity.cookTick(serverLevel, blockPos, blockStatex, solarOvenBlockEntity, cachedCheck)
-                );
+                return createTickerHelper(blockEntityType, ModBlockEntities.SOLAR_OVEN_BLOCK_ENTITY.get(), Solar_Oven_Block::tickEntity);
             } else {
                 return createTickerHelper(blockEntityType, ModBlockEntities.SOLAR_OVEN_BLOCK_ENTITY.get(), SolarOvenBlockEntity::cooldownTick);
             }
@@ -68,6 +71,15 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
         }
     }
 
+    private static void tickEntity(Level level, BlockPos pos, BlockState state, SolarOvenBlockEntity blockEntity) {
+        if (level.getGameTime() % 20L == 0L) {
+            updateSignalStrength(state, level, pos);
+        }
+        if (level instanceof ServerLevel serverLevel) {
+            RecipeManager.CachedCheck<SingleRecipeInput, SmeltingRecipe> cachedCheck = RecipeManager.createCheck(RecipeType.SMELTING);
+            SolarOvenBlockEntity.cookTick(serverLevel, pos, state, blockEntity, cachedCheck);
+        }
+    }
 
     @Override
     protected InteractionResult useItemOn(
@@ -119,6 +131,21 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
         }
     }
 
+    private static void updateSignalStrength(BlockState blockState, Level level, BlockPos blockPos) {
+        int i = level.getBrightness(LightLayer.SKY, blockPos) - level.getSkyDarken();
+        float f = level.getSunAngle(1.0F);
+        if (i > 0) {
+            float g = f < (float) Math.PI ? 0.0F : (float) (Math.PI * 2);
+            f += (g - f) * 0.2F;
+            i = Math.round((float)i * Mth.cos(f));
+        }
+
+        i = Mth.clamp(i, 0, 15);
+        if (blockState.getValue(INTENSITY) != i) {
+            level.setBlock(blockPos, blockState.setValue(INTENSITY, Integer.valueOf(i)), 3);
+        }
+    }
+
     protected void onRemove(BlockState blockState, Level level, BlockPos pos,  BlockState state, boolean isMoving) {
         //TODO: drop contents if not empty
         super.onRemove(blockState, level, pos, state, isMoving);
@@ -126,6 +153,11 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(LIT, INTENSITY);
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return SHAPE;
     }
 
     static {

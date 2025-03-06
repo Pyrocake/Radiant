@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.logging.Logger;
 
 public class Sun_Block extends BaseEntityBlock implements EntityBlock {
-    public static final VoxelShape SHAPE = Block.box(0, 0,0,16,12,16);
+    public static final VoxelShape SHAPE = Block.box(0, 0,0,16,16,12);
     public static final IntegerProperty POWER;
 
     public Sun_Block(Properties properties) {
