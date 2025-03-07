@@ -5,6 +5,8 @@ import io.github.pyrocake.block.custom.Solar_Oven_Block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -14,12 +16,10 @@ import net.minecraft.world.Clearable;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.block.GameMasterBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -32,16 +32,13 @@ import static io.github.pyrocake.block.custom.Solar_Oven_Block.INTENSITY;
 
 public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     private static final int NUM_SLOTS = 4;
-    private final NonNullList<ItemStack> items;
-    public final int[] cookingProgress;
-    private final int[] cookingTime;
+    private final NonNullList<ItemStack> items = NonNullList.withSize(NUM_SLOTS, ItemStack.EMPTY);
+    private final int[] cookingProgress = new int[NUM_SLOTS];
+    private final int[] cookingTime = new int[NUM_SLOTS];
 
 
     public SolarOvenBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_OVEN_BLOCK_ENTITY.get(), pos, blockState);
-        this.items = NonNullList.withSize(NUM_SLOTS, ItemStack.EMPTY);
-        this.cookingProgress = new int[NUM_SLOTS];
-        this.cookingTime = new int[NUM_SLOTS];
     }
 
     public static void cooldownTick(Level level, BlockPos blockPos, BlockState blockState, SolarOvenBlockEntity blockEntity) {
@@ -131,28 +128,49 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
         }
     }
 
-//    @Override
-//    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-//        super.loadAdditional(compoundTag, provider);
-//        this.items.clear();
-//        ContainerHelper.loadAllItems(compoundTag, this.items, provider);
-//        compoundTag.getIntArray("CookingTimes")
-//                .ifPresentOrElse(
-//                        is -> System.arraycopy(is, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, is.length)), () -> Arrays.fill(this.cookingProgress, 0)
-//                );
-//        compoundTag.getIntArray("CookingTotalTimes")
-//                .ifPresentOrElse(is -> System.arraycopy(is, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, is.length)), () -> Arrays.fill(this.cookingTime, 0));
-//    }
-//
-//    @Override
-//    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-//        super.saveAdditional(compoundTag, provider);
-//        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
-//        compoundTag.putIntArray("CookingTimes", this.cookingProgress);
-//        compoundTag.putIntArray("CookingTotalTimes", this.cookingTime);
-//    }
+    @Override
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
+        this.items.clear();
+        ContainerHelper.loadAllItems(compoundTag, this.items, provider);
+        if (compoundTag.contains("CookingTimes", 11)) {
+            int[] aint = compoundTag.getIntArray("CookingTimes");
+            System.arraycopy(aint, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, aint.length));
+        }
+
+        if (compoundTag.contains("CookingTotalTimes", 11)) {
+            int[] aint1 = compoundTag.getIntArray("CookingTotalTimes");
+            System.arraycopy(aint1, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, aint1.length));
+        }
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.saveAdditional(compoundTag, provider);
+        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
+        //Radiant.logger.info("Stuff B: " + this.items);
+        compoundTag.putIntArray("CookingTimes", this.cookingProgress);
+        compoundTag.putIntArray("CookingTotalTimes", this.cookingTime);
+    }
 
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    public NonNullList<ItemStack> getItems() {
+        //Radiant.logger.info("Stuff: " + this.items);
+        return this.items;
+    }
+
+    @Override
+    protected void applyImplicitComponents(BlockEntity.DataComponentInput input) {
+        super.applyImplicitComponents(input);
+        input.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
+    }
+
+    @Override
+    protected void collectImplicitComponents(DataComponentMap.Builder builder) {
+        super.collectImplicitComponents(builder);
+        builder.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
     }
 }

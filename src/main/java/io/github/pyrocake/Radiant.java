@@ -2,6 +2,7 @@ package io.github.pyrocake;
 
 import io.github.pyrocake.block.entity.ConnectorBlockEntity;
 import io.github.pyrocake.block.entity.ModBlockEntities;
+import io.github.pyrocake.block.entity.SolarOvenRenderer;
 import io.github.pyrocake.data.DataGenerators;
 import io.github.pyrocake.block.ModBlocks;
 import io.github.pyrocake.item.CreativeModeTabInit;
@@ -20,6 +21,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.NotNull;
@@ -65,6 +67,11 @@ public class Radiant {
         @SubscribeEvent
         public static void onClientStartup(FMLClientSetupEvent event) {
 
+        }
+        @SubscribeEvent
+        static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(ModBlockEntities.SOLAR_OVEN_BLOCK_ENTITY.get(), SolarOvenRenderer::new);
+            logger.info("Renderers Done!");
         }
     }
 }

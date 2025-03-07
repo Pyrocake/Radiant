@@ -6,12 +6,14 @@ import io.github.pyrocake.block.entity.ModBlockEntities;
 import io.github.pyrocake.block.entity.SolarOvenBlockEntity;
 import io.github.pyrocake.block.entity.SunBlockBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -33,6 +35,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -43,7 +46,8 @@ import static net.minecraft.client.renderer.LightTexture.getBrightness;
 public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static IntegerProperty INTENSITY = BlockStateProperties.POWER;
-    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 9.0, 16.0);
+    public static final Property<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
 
     public Solar_Oven_Block(Properties properties) {
         super(properties);
@@ -91,11 +95,9 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
                 if (level instanceof ServerLevel serverLevel && oven.placeSmeltable(serverLevel, player, itemStack2)) {
                     return InteractionResult.SUCCESS_SERVER;
                 }
-
                 return InteractionResult.CONSUME;
             }
         }
-
         return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
@@ -147,12 +149,17 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
     }
 
     protected void onRemove(BlockState blockState, Level level, BlockPos pos,  BlockState state, boolean isMoving) {
-        //TODO: drop contents if not empty
-        super.onRemove(blockState, level, pos, state, isMoving);
+        if (!blockState.is(state.getBlock())) {
+            BlockEntity blockentity = level.getBlockEntity(pos);
+            if (blockentity instanceof SolarOvenBlockEntity) {
+                Containers.dropContents(level, pos, ((SolarOvenBlockEntity)blockentity).getItems());
+            }
+            super.onRemove(blockState, level, pos, state, isMoving);
+        }
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LIT, INTENSITY);
+        builder.add(LIT, INTENSITY, FACING);
     }
 
     @Override
