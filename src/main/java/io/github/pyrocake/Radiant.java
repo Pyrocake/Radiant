@@ -49,7 +49,7 @@ public class Radiant {
             fmlClientSetupEvent.enqueueWork(() -> {
                 ModList.get().getModContainerById(MOD_ID).ifPresent(modContainer -> {
                     logger.info("Waking up the sun, version: {}", modContainer.getModInfo().getVersion());
-                    ItemBlockRenderTypes.setRenderLayer(ModBlocks.CONNECTOR_BLOCK.get(), RenderType.cutout());
+                    //ItemBlockRenderTypes.setRenderLayer(ModBlocks.CONNECTOR_BLOCK.get(), RenderType.cutout());
                 });
             });
         }));
@@ -67,11 +67,6 @@ public class Radiant {
         @SubscribeEvent
         public static void onClientStartup(FMLClientSetupEvent event) {
 
-        }
-        @SubscribeEvent
-        static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(ModBlockEntities.SOLAR_OVEN_BLOCK_ENTITY.get(), SolarOvenRenderer::new);
-            logger.info("Renderers Done!");
         }
     }
 }

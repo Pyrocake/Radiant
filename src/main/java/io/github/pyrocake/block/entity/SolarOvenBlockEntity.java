@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Clearable;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -32,7 +34,7 @@ import static io.github.pyrocake.block.custom.Solar_Oven_Block.INTENSITY;
 
 public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     private static final int NUM_SLOTS = 4;
-    private final NonNullList<ItemStack> items = NonNullList.withSize(NUM_SLOTS, ItemStack.EMPTY);
+    public final NonNullList<ItemStack> items = NonNullList.withSize(NUM_SLOTS, ItemStack.EMPTY);
     private final int[] cookingProgress = new int[NUM_SLOTS];
     private final int[] cookingTime = new int[NUM_SLOTS];
 
@@ -158,7 +160,6 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     }
 
     public NonNullList<ItemStack> getItems() {
-        //Radiant.logger.info("Stuff: " + this.items);
         return this.items;
     }
 
@@ -172,5 +173,12 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     protected void collectImplicitComponents(DataComponentMap.Builder builder) {
         super.collectImplicitComponents(builder);
         builder.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        CompoundTag compoundTag = new CompoundTag();
+        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
+        return compoundTag;
     }
 }

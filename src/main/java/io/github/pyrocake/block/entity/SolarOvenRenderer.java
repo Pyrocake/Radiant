@@ -24,6 +24,7 @@ public class SolarOvenRenderer implements BlockEntityRenderer<SolarOvenBlockEnti
         this.itemRenderer = context.getItemRenderer();
     }
 
+    @Override
     public void render(SolarOvenBlockEntity oven, float f, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j) {
         Direction direction = oven.getBlockState().getValue(Solar_Oven_Block.FACING);
         NonNullList<ItemStack> items = oven.getItems();
@@ -31,19 +32,16 @@ public class SolarOvenRenderer implements BlockEntityRenderer<SolarOvenBlockEnti
         for (int l = 0; l < items.size(); l++) {
             ItemStack itemStack = items.get(l);
             if (itemStack != ItemStack.EMPTY) {
-                Radiant.logger.info("Cooking");
                 poseStack.pushPose();
-                poseStack.translate(0.5F, 0.44921875F, 0.5F);
+                poseStack.translate(0.5F, .23F, 0.5F);
                 Direction direction2 = Direction.from2DDataValue((l + direction.get2DDataValue()) % 4);
                 float g = -direction2.toYRot();
                 poseStack.mulPose(Axis.YP.rotationDegrees(g));
                 poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
-                poseStack.translate(-0.3125F, -0.3125F, 0.0F);
+                poseStack.translate(-0.1875F, -0.1875F, 0.0F);
                 poseStack.scale(SIZE, SIZE, SIZE);
                 this.itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, i, j, poseStack, multiBufferSource, oven.getLevel(), k + l);
                 poseStack.popPose();
-            } else {
-
             }
         }
     }
