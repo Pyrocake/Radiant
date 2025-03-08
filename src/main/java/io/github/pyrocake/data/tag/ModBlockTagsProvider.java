@@ -23,12 +23,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .addTag(TagsInit.Blocks.PRISMALLON_BLOCK_TAG)
                 .addTag(TagsInit.Blocks.PRISMALLON_ORE_TAG)
                 .addTag(TagsInit.Blocks.DEEPSLATE_PRISMALLON_ORE_TAG)
-
-                .add(ModBlocks.RAW_PRISMALLON_BLOCK.get());
+                .add(ModBlocks.RAW_PRISMALLON_BLOCK.get())
+                .add(ModBlocks.SOLAR_OVEN_BLOCK.get());
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .addTag(TagsInit.Blocks.PRISMALLON_BLOCK_TAG)
                 .addTag(TagsInit.Blocks.PRISMALLON_ORE_TAG)
-                .addTag(TagsInit.Blocks.DEEPSLATE_PRISMALLON_ORE_TAG);
+                .addTag(TagsInit.Blocks.DEEPSLATE_PRISMALLON_ORE_TAG)
+                .add(ModBlocks.SOLAR_OVEN_BLOCK.get());
         
         tag(Tags.Blocks.ORES)
                 .add(ModBlocks.PRISMALLON_ORE_BLOCK.get())

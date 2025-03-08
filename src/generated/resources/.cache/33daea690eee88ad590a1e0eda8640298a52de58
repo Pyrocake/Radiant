@@ -1,7 +1,7 @@
-// 1.21.4	2025-02-26T03:55:47.3323134	Tags for minecraft:block mod id radiant
+// 1.21.4	2025-03-08T12:36:56.4090793	Tags for minecraft:block mod id radiant
 c03875464f9b84fc2a8707c57443c001c7cdc08f data/c/tags/block/ores.json
-ae2839d836b3adb2c873b9bc2f8eb52266915bec data/minecraft/tags/block/mineable/pickaxe.json
-0173c925fc329b2ad16dbbf153b69ff56944f9a0 data/minecraft/tags/block/needs_iron_tool.json
+66686eab990682385e10801faeafe01715b4f296 data/minecraft/tags/block/mineable/pickaxe.json
+96d9a6b83ae291b749b713928963368c8f53017a data/minecraft/tags/block/needs_iron_tool.json
 7d8659e4da905ba0c50381dfad2db2d5e37bc3c5 data/radiant/tags/block/ores/deepslate_prismallon_ore.json
 c93f95dc8a8f0d862a87a48e9dc4d946973a72f0 data/radiant/tags/block/ores/prismallon_ore.json
 66939be2f0c184b431fdf4f46081faddbb276e5e data/radiant/tags/block/prismallon_block.json

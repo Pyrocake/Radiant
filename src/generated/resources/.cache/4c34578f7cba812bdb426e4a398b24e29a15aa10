@@ -1,4 +1,4 @@
-// 1.21.4	2025-02-26T21:13:35.04735	Radiant Recipes
+// 1.21.4	2025-03-08T12:38:56.1068389	Radiant Recipes
 4fe1912bfee70a05644d0dda0925761a65d73302 data/minecraft/advancement/recipes/misc/prismallon_block.json
 ee6d0eea0664e2f5ae04ca81923b54a2b3af1a12 data/minecraft/advancement/recipes/misc/prismallon_ingot_from_blasting_deepslate_prismallon_ore.json
 b8868ef2935828ea44a54409d20149742b158dc7 data/minecraft/advancement/recipes/misc/prismallon_ingot_from_blasting_prismallon_ore.json
@@ -23,3 +23,5 @@ f86cd33eb9c63388dc862e969f7fab83a15180e0 data/minecraft/recipe/prismallon_ingot_
 38aaa3465f0135e141c06bde893e98c2195db0a2 data/minecraft/recipe/prismallon_nugget.json
 968390c94d8168a2af3d5a90c22854e004e7c532 data/minecraft/recipe/raw_prismallon.json
 bbf0b83513a2285d13f783e6a614361172cb36d2 data/minecraft/recipe/raw_prismallon_block.json
+14a9f7b4dc7e4ff2391f61cc739d21add7c1d76e data/radiant/advancement/recipes/misc/solar_oven_block.json
+054efd3ba3710bf9e6293b347dfaf6faef7c5341 data/radiant/recipe/solar_oven_block.json

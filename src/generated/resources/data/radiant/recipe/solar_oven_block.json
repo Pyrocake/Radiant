@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": "#minecraft:logs",
+    "P": "radiant:prismallon_ingot"
+  },
+  "pattern": [
+    "P P",
+    "LPL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "radiant:solar_oven_block"
+  }
+}

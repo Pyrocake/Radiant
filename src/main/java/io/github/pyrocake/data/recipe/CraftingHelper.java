@@ -3,14 +3,19 @@ package io.github.pyrocake.data.recipe;
 import io.github.pyrocake.Radiant;
 import io.github.pyrocake.block.ModBlocks;
 import io.github.pyrocake.item.ModItems;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +31,7 @@ public class CraftingHelper extends RecipeProvider{
 
     @Override
     protected void buildRecipes() {
+        HolderGetter<Item> getter = this.registries.lookupOrThrow(Registries.ITEM);
         oreSmelting(PRISMALLON_SMELTABLES, RecipeCategory.MISC, ModItems.PRISMALLON_INGOT.get(), 1f, 200, "prismallon_ingot");
         oreBlasting(PRISMALLON_SMELTABLES, RecipeCategory.MISC, ModItems.PRISMALLON_INGOT.get(), 1f, 100, "prismallon_ingot");
 
@@ -39,6 +45,14 @@ public class CraftingHelper extends RecipeProvider{
                 RecipeCategory.MISC, ModItems.PRISMALLON_INGOT,
                 "prismallon_ingot_from_nuggets", "prismallon_ingot"
         );
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, ModBlocks.SOLAR_OVEN_BLOCK.get())
+                .pattern("P P")
+                .pattern("LPL")
+                .define('P', Ingredient.of(ModItems.PRISMALLON_INGOT.get()))
+                .define('L', ItemTags.LOGS)
+                .unlockedBy("has_prismallon_ingot", has(ModItems.PRISMALLON_INGOT.get()))
+                .save(this.output);
+
 
     }
 

@@ -3,6 +3,7 @@
     "#radiant:prismallon_block",
     "#radiant:ores/prismallon_ore",
     "#radiant:ores/deepslate_prismallon_ore",
-    "radiant:raw_prismallon_block"
+    "radiant:raw_prismallon_block",
+    "radiant:solar_oven_block"
   ]
 }

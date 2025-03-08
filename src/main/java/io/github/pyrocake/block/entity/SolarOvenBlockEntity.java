@@ -104,8 +104,7 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
                 if (optional.isEmpty()) {
                     return false;
                 }
-
-                this.cookingTime[i] = ((SmeltingRecipe)((RecipeHolder)optional.get()).value()).cookingTime() * 15;
+                this.cookingTime[i] = ((SmeltingRecipe)((RecipeHolder)optional.get()).value()).cookingTime() * 3 * 15 ; //3 for campfire sync and 15 because cook time advances by POWER
                 this.cookingProgress[i] = 0;
                 this.items.set(i, itemStack.consumeAndReturn(1, livingEntity));
                 serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, this.getBlockPos(), GameEvent.Context.of(livingEntity, this.getBlockState()));
@@ -150,7 +149,6 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
         super.saveAdditional(compoundTag, provider);
         ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
-        //Radiant.logger.info("Stuff B: " + this.items);
         compoundTag.putIntArray("CookingTimes", this.cookingProgress);
         compoundTag.putIntArray("CookingTotalTimes", this.cookingTime);
     }

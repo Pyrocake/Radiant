@@ -30,12 +30,6 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
     public static final VoxelShape W = Block.box(0, 5, 5, 5, 11, 11);
     public static final VoxelShape U = Block.box(5, 11, 5, 11, 16, 11);
     public static final VoxelShape D = Block.box(5, 0, 5, 11, 5, 11);
-//    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
-//    public static final BooleanProperty EAST = BlockStateProperties.EAST;
-//    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
-//    public static final BooleanProperty WEST = BlockStateProperties.WEST;
-//    public static final BooleanProperty UP = BlockStateProperties.UP;
-//    public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
 
     public Connector_Block(Properties properties) {
         super(.5f, properties);
