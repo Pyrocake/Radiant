@@ -1,4 +1,5 @@
 {
+  "block.radiant.collector_block": "Collector Block WIP",
   "block.radiant.connector_block": "Connection Tester WIP",
   "block.radiant.deepslate_prismallon_ore": "Deepslate Prismallon Ore",
   "block.radiant.prismallon_block": "Prismallon Block",
@@ -9,5 +10,10 @@
   "item.radiant.prismallon_ingot": "Prismallon Ingot",
   "item.radiant.prismallon_nugget": "Prismallon Nugget",
   "item.radiant.raw_prismallon": "Raw Prismallon",
-  "radiant.tab": "Radiant"
+  "radiant.tab": "Radiant",
+  "config.jade.plugin_radiant.collector": "Collector",
+  "config.jade.plugin_radiant.solaroven": "Solar Oven",
+  "radiant.heatdisp": "Exposure",
+  "radiant.exposure": "Exposure (+%d/t)",
+  "radiant.energybar": "%d SP"
 }

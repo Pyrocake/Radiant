@@ -18,9 +18,4 @@ public class RadiantClientRegistration {
         event.enqueueWork(() -> {
         });
     }
-
-    @SubscribeEvent
-    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(ModBlockEntities.SOLAR_OVEN_BLOCK_ENTITY.get(), SolarOvenRenderer::new);
-    }
 }

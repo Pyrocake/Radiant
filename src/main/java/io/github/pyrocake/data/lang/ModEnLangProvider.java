@@ -28,6 +28,7 @@ public class ModEnLangProvider extends LanguageProvider {
         addBlock(ModBlocks.CONNECTOR_BLOCK, "Connection Tester WIP");
         addBlock(ModBlocks.SOLAR_OVEN_BLOCK, "Solar Oven");
         addBlock(ModBlocks.SUN_BLOCK, "Sun Block WIP");
+        addBlock(ModBlocks.COLLECTOR_BLOCK, "Collector Block WIP");
 
         //Misc
         add(CreativeModeTabInit.RADIANT_TAB_TITLE, "Radiant");

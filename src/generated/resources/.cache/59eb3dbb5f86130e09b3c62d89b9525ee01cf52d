@@ -1,4 +1,5 @@
-// 1.21.4	2025-03-02T21:16:37.4634482	Loot Tables
+// 1.21.4	2025-03-11T11:50:43.7593114	Loot Tables
+15a1a37ff5619f70c969569641ce0fda01a9ebc4 data/radiant/loot_table/blocks/collector_block.json
 2a27d19fae10d83c763b17ddd74ae34bcc27c918 data/radiant/loot_table/blocks/connector_block.json
 b602adb4d829e867ca4732561d9bdfa28a4ce6dd data/radiant/loot_table/blocks/deepslate_prismallon_ore.json
 9daa1059e787153d1504d8388d11fcfb81071a64 data/radiant/loot_table/blocks/prismallon_block.json

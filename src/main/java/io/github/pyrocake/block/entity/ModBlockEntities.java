@@ -27,6 +27,11 @@ public class ModBlockEntities {
                     SolarOvenBlockEntity::new,
                     ModBlocks.SOLAR_OVEN_BLOCK.get()
             ));
+    public static final Supplier<BlockEntityType<CollectorBlockEntity>> COLLECTOR_BLOCK_ENTITY = BLOCK_ENTITIES.register("collector_block_entity",
+            () -> new BlockEntityType<>(
+                    CollectorBlockEntity::new,
+                    ModBlocks.COLLECTOR_BLOCK.get()
+            ));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

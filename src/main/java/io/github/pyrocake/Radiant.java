@@ -53,8 +53,6 @@ public class Radiant {
                 });
             });
         }));
-
-        //container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     @SubscribeEvent
@@ -67,6 +65,11 @@ public class Radiant {
         @SubscribeEvent
         public static void onClientStartup(FMLClientSetupEvent event) {
 
+        }
+
+        @SubscribeEvent
+        public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(ModBlockEntities.SOLAR_OVEN_BLOCK_ENTITY.get(), SolarOvenRenderer::new);
         }
     }
 }

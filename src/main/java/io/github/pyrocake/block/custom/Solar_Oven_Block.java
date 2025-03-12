@@ -45,7 +45,7 @@ import static net.minecraft.client.renderer.LightTexture.getBrightness;
 
 public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-    public static IntegerProperty INTENSITY = BlockStateProperties.POWER;
+    public static IntegerProperty INTENSITY = IntegerProperty.create("intensity", 0, 15);
     public static final Property<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
 
@@ -144,7 +144,7 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
 
         i = Mth.clamp(i, 0, 15);
         if (blockState.getValue(INTENSITY) != i) {
-            level.setBlock(blockPos, blockState.setValue(INTENSITY, Integer.valueOf(i)), 3);
+            level.setBlock(blockPos, blockState.setValue(INTENSITY, i), 3);
         }
     }
 
@@ -167,7 +167,16 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
         return SHAPE;
     }
 
-    static {
-        INTENSITY = BlockStateProperties.POWER;
+    public float intensity(Level level, BlockPos blockPos) {
+        float i = level.getBrightness(LightLayer.SKY, blockPos.above()) - level.getSkyDarken();
+        float f = level.getSunAngle(1.0F);
+        if (i > 0) {
+            float g = f < (float) Math.PI ? 0.0F : (float) (Math.PI * 2);
+            f += (g - f) * 0.2F;
+            i = i * Mth.cos(f);
+        }
+
+        i = Mth.clamp(i, 0, 15);
+        return i;
     }
 }

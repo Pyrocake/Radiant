@@ -1,4 +1,5 @@
-// 1.21.4	2025-03-02T21:16:37.4654497	Model Definitions - radiant
+// 1.21.4	2025-03-11T11:50:43.761311	Model Definitions - radiant
+9a3747327048d282627725fc0d2ae1916280987e assets/radiant/blockstates/collector_block.json
 d611511b522008ff9a3836d155255d264c1eaa88 assets/radiant/blockstates/connector_block.json
 00ea6adf045857aecd8825757d196dd2e055fef7 assets/radiant/blockstates/deepslate_prismallon_ore.json
 4f2a03609d6862d2bb545cb2d340380fa5e2855a assets/radiant/blockstates/prismallon_block.json
@@ -6,6 +7,7 @@ d611511b522008ff9a3836d155255d264c1eaa88 assets/radiant/blockstates/connector_bl
 bc76823d7e8cad7730aef76a87aee525f52672a0 assets/radiant/blockstates/raw_prismallon_block.json
 1092c03a93683f9a5d716c465711c9c8c11958f7 assets/radiant/blockstates/solar_oven_block.json
 08fe0bcf63cc54fc9e6f5ec2ffbedc3614d836c0 assets/radiant/blockstates/sun_block.json
+84d07dc73472f99559c7e5708128868845977ff8 assets/radiant/items/collector_block.json
 c9df1487bc86324471dfd4af24118e4f131d5245 assets/radiant/items/connector_block.json
 a3828f978b5fac6da172a2d92949c896ef09801d assets/radiant/items/deepslate_prismallon_ore.json
 de2d1cd2e4d0cd393db2ccb39396b5b01a2c6e2c assets/radiant/items/prismallon_block.json
@@ -16,6 +18,7 @@ b11c7bacf01695e2659add35f20d83e98c6a965d assets/radiant/items/prismallon_ore.jso
 74a855184571502db2bff671a0ea6d1b84d19761 assets/radiant/items/raw_prismallon_block.json
 2daf9078ba4eb8e29da0b56fb7216a627baf8b7d assets/radiant/items/solar_oven_block.json
 98cd2d537cae84a40c34f139b612c1da983edabb assets/radiant/items/sun_block.json
+9f5092331ce1abe8ab264ca9cdc0e2681e50d6c2 assets/radiant/models/block/collector_block.json
 24c96fd30c24cff61a86716d4230c3b9b372279c assets/radiant/models/block/connector_block.json
 9325b538aa8381373474e01ee64c7302099204d0 assets/radiant/models/block/deepslate_prismallon_ore.json
 5bb078a65ee81efa8451a805967c592a03030f48 assets/radiant/models/block/prismallon_block.json

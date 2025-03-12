@@ -29,6 +29,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.SUN_BLOCK.get());
         dropSelf(ModBlocks.CONNECTOR_BLOCK.get());
         dropSelf(ModBlocks.SOLAR_OVEN_BLOCK.get());
+        dropSelf(ModBlocks.COLLECTOR_BLOCK.get());
     }
 
     @Override
