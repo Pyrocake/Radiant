@@ -70,10 +70,10 @@ public class Sun_Block extends BaseEntityBlock implements EntityBlock {
     }
 
 
-    @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
+//    @Override
+//    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+//        super.onRemove(state, level, pos, newState, movedByPiston);
+//    }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {

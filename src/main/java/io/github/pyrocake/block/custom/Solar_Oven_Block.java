@@ -148,15 +148,15 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
         }
     }
 
-    protected void onRemove(BlockState blockState, Level level, BlockPos pos,  BlockState state, boolean isMoving) {
-        if (!blockState.is(state.getBlock())) {
-            BlockEntity blockentity = level.getBlockEntity(pos);
-            if (blockentity instanceof SolarOvenBlockEntity) {
-                Containers.dropContents(level, pos, ((SolarOvenBlockEntity)blockentity).getItems());
-            }
-            super.onRemove(blockState, level, pos, state, isMoving);
-        }
-    }
+//    protected void onRemove(BlockState blockState, Level level, BlockPos pos,  BlockState state, boolean isMoving) {
+//        if (!blockState.is(state.getBlock())) {
+//            BlockEntity blockentity = level.getBlockEntity(pos);
+//            if (blockentity instanceof SolarOvenBlockEntity) {
+//                Containers.dropContents(level, pos, ((SolarOvenBlockEntity)blockentity).getItems());
+//            }
+//            super.onRemove(blockState, level, pos, state, isMoving);
+//        }
+//    }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(LIT, INTENSITY, FACING);

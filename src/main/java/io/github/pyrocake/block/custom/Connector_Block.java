@@ -114,8 +114,8 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
         builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 
-    @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
+//    @Override
+//    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+//        super.onRemove(state, level, pos, newState, movedByPiston);
+//    }
 }

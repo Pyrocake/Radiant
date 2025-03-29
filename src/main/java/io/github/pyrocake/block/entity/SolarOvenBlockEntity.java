@@ -5,6 +5,7 @@ import io.github.pyrocake.block.custom.Solar_Oven_Block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -134,13 +135,13 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
         super.loadAdditional(compoundTag, provider);
         this.items.clear();
         ContainerHelper.loadAllItems(compoundTag, this.items, provider);
-        if (compoundTag.contains("CookingTimes", 11)) {
-            int[] aint = compoundTag.getIntArray("CookingTimes");
+        if (compoundTag.contains("CookingTimes")) {
+            int[] aint = compoundTag.getIntArray("CookingTimes").get();
             System.arraycopy(aint, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, aint.length));
         }
 
-        if (compoundTag.contains("CookingTotalTimes", 11)) {
-            int[] aint1 = compoundTag.getIntArray("CookingTotalTimes");
+        if (compoundTag.contains("CookingTotalTimes")) {
+            int[] aint1 = compoundTag.getIntArray("CookingTotalTimes").get();
             System.arraycopy(aint1, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, aint1.length));
         }
     }
@@ -162,7 +163,7 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     }
 
     @Override
-    protected void applyImplicitComponents(BlockEntity.DataComponentInput input) {
+    protected void applyImplicitComponents(DataComponentGetter input) {
         super.applyImplicitComponents(input);
         input.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
     }
@@ -178,5 +179,12 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
         CompoundTag compoundTag = new CompoundTag();
         ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
         return compoundTag;
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos blockPos, BlockState blockState) {
+        if (this.level != null) {
+            Containers.dropContents(this.level, blockPos, this.getItems());
+        }
     }
 }

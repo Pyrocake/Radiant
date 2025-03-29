@@ -32,13 +32,14 @@ public enum CollectorProvider implements IBlockComponentProvider, IServerDataPro
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
         if (blockAccessor.getBlockEntity() instanceof CollectorBlockEntity entity) {
             if (blockAccessor.getServerData().contains("Energy")) {
-                iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Energy") / blockAccessor.getServerData().getFloat("Capacity")),
-                        Component.translatable("radiant.energybar", (int) blockAccessor.getServerData().getFloat("Energy")),
+                float ener = blockAccessor.getServerData().getFloat("Energy").get();
+                iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Energy").get() / blockAccessor.getServerData().getFloat("Capacity").get()),
+                        Component.translatable("radiant.energybar", (int) ener),
                         IElementHelper.get().progressStyle().color(0x81d5f6).textColor(0xFFFFFF), BoxStyle.getNestedBox(), true));
             }
             if (blockAccessor.getServerData().contains("Intensity")) {
-                iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Intensity") / 15F),
-                        Component.translatable("radiant.exposure", blockAccessor.getServerData().getInt("ChargeRate")),
+                iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Intensity").get() / 15F),
+                        Component.translatable("radiant.exposure", blockAccessor.getServerData().getInt("ChargeRate").get()),
                         IElementHelper.get().progressStyle().color(red.getRGB()).textColor(0xFFFFFF), BoxStyle.getNestedBox(), true));
             }
 

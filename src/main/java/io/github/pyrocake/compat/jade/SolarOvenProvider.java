@@ -29,8 +29,8 @@ public enum SolarOvenProvider implements IBlockComponentProvider, IServerDataPro
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
         if (blockAccessor.getServerData().contains("Intensity")) {
-            iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Intensity") / 15F),
-                    Component.translatable("radiant.heatdisp", blockAccessor.getServerData().getInt("ChargeRate")),
+            iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Intensity").get() / 15F),
+                    Component.translatable("radiant.heatdisp", blockAccessor.getServerData().getInt("ChargeRate").get()),
                     IElementHelper.get().progressStyle().color(red.getRGB()).textColor(0xFFFFFF), BoxStyle.getNestedBox(), true));
         }
     }
@@ -45,5 +45,7 @@ public enum SolarOvenProvider implements IBlockComponentProvider, IServerDataPro
         Solar_Oven_Block block = (Solar_Oven_Block) accessor.getBlock();
         Level level = accessor.getLevel();
         data.putFloat("Intensity", block.intensity(level, accessor.getPosition()));
+        BlockState state = accessor.getBlockEntity().getBlockState();
+        data.putInt("ChargeRate", state.getValue(Solar_Oven_Block.INTENSITY));
     }
 }

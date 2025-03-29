@@ -11,6 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -24,7 +25,7 @@ public class SolarOvenRenderer implements BlockEntityRenderer<SolarOvenBlockEnti
     }
 
     @Override
-    public void render(SolarOvenBlockEntity oven, float f, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j) {
+    public void render(SolarOvenBlockEntity oven, float v, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, Vec3 vec) {
         Direction direction = oven.getBlockState().getValue(Solar_Oven_Block.FACING);
         NonNullList<ItemStack> items = oven.getItems();
         int k = (int)oven.getBlockPos().asLong();

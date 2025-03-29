@@ -13,6 +13,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -27,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.security.DrbgParameters;
+import java.util.Optional;
 
 import static io.github.pyrocake.block.custom.Collector_Block.INTENSITY;
 
@@ -73,14 +75,14 @@ public class CollectorBlockEntity extends BlockEntity {
     @Override
     public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
         super.loadAdditional(compoundTag, provider);
-        CompoundTag radiantData = compoundTag.getCompound(Radiant.MOD_ID);
+        Optional<CompoundTag> radiantData = compoundTag.getCompound(Radiant.MOD_ID);
         if(radiantData.isEmpty())
             return;
-        if (radiantData.contains("Inventory", Tag.TAG_COMPOUND)) {
+        if (radiantData.get().contains("Inventory")) {
             //this.items.(tutorialmodData.getCompound("Inventory"));
         }
-        if(radiantData.contains("Energy", Tag.TAG_INT)) {
-            this.energy.deserializeNBT(provider, radiantData.get("Energy"));
+        if(radiantData.get().contains("Energy")) {
+            this.energy.deserializeNBT(provider, radiantData.get().get("Energy"));
         }
     }
 
@@ -98,7 +100,7 @@ public class CollectorBlockEntity extends BlockEntity {
     }
 
 //    @Override
-//    public @NotNull <T> Lazy<T> getCapability(@NotNull DrbgParameters.Capability<T> cap) {
+//    public @NotNull <T> Lazy<T> getCapability(@NotNull Capabilities<T> cap) {
 //        if (cap == Capabilities.ItemHandler.BLOCK) {
 //            return this.inventoryOptional.cast();
 //        } else if (cap == ForgeCapabilities.ENERGY) {
@@ -151,5 +153,12 @@ public class CollectorBlockEntity extends BlockEntity {
     private void markUpdated() {
         this.setChanged();
         this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos blockPos, BlockState blockState) {
+        if (this.level != null) {
+            Containers.dropContents(this.level, blockPos, this.items);
+        }
     }
 }

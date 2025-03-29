@@ -69,15 +69,17 @@ public class Collector_Block extends BaseEntityBlock implements EntityBlock {
         }
     }
 
-    protected void onRemove(BlockState blockState, Level level, BlockPos pos,  BlockState state, boolean isMoving) {
-        if (!blockState.is(state.getBlock())) {
-            BlockEntity blockentity = level.getBlockEntity(pos);
+//    protected void onRemove(BlockState blockState, Level level, BlockPos pos,  BlockState state, boolean isMoving) {
+//        if (!blockState.is(state.getBlock())) {
+//            BlockEntity blockentity = level.getBlockEntity(pos);
 //            if (blockentity instanceof CollectorBlockEntity) {
 //                Containers.dropContents(level, pos, ((CollectorBlockEntity)blockentity).getItems());
 //            }
-            super.onRemove(blockState, level, pos, state, isMoving);
-        }
-    }
+//            super.onRemove(blockState, level, pos, state, isMoving);
+//        }
+//    }
+
+
 
     private static void updateSignalStrength(BlockState blockState, Level level, BlockPos blockPos) {
         int i = level.getBrightness(LightLayer.SKY, blockPos.above()) - level.getSkyDarken();
