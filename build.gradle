@@ -128,7 +128,8 @@ dependencies {
 
     // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
     // localRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
-    implementation "curse.maven:jade-324717:6353729"
+    implementation "curse.maven:jade-324717:6389812"
+
     implementation "curse.maven:architectury-api-419699:6406228"
     implementation "curse.maven:cloth-config-348521:6351757"
 
