@@ -23,29 +23,29 @@ import snownee.jade.impl.ui.ProgressElement;
 import static io.github.pyrocake.block.custom.Solar_Oven_Block.INTENSITY;
 import static java.awt.Color.red;
 
-public enum SolarOvenProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
-    INSTANCE;
-
-    @Override
-    public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (blockAccessor.getServerData().contains("Intensity")) {
-            iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Intensity").get() / 15F),
-                    Component.translatable("radiant.heatdisp", blockAccessor.getServerData().getInt("ChargeRate").get()),
-                    IElementHelper.get().progressStyle().color(red.getRGB()).textColor(0xFFFFFF), BoxStyle.getNestedBox(), true));
-        }
-    }
-
-    @Override
-    public ResourceLocation getUid() {
-        return ResourceLocation.fromNamespaceAndPath(Radiant.MOD_ID, "solaroven");
-    }
-
-    @Override
-    public void appendServerData(CompoundTag data, BlockAccessor accessor) {
-        Solar_Oven_Block block = (Solar_Oven_Block) accessor.getBlock();
-        Level level = accessor.getLevel();
-        data.putFloat("Intensity", block.intensity(level, accessor.getPosition()));
-        BlockState state = accessor.getBlockEntity().getBlockState();
-        data.putInt("ChargeRate", state.getValue(Solar_Oven_Block.INTENSITY));
-    }
-}
+//public enum SolarOvenProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
+//    INSTANCE;
+//
+//    @Override
+//    public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
+//        if (blockAccessor.getServerData().contains("Intensity")) {
+//            iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Intensity").get() / 15F),
+//                    Component.translatable("radiant.heatdisp", blockAccessor.getServerData().getInt("ChargeRate").get()),
+//                    IElementHelper.get().progressStyle().color(red.getRGB()).textColor(0xFFFFFF), BoxStyle.getNestedBox(), true));
+//        }
+//    }
+//
+//    @Override
+//    public ResourceLocation getUid() {
+//        return ResourceLocation.fromNamespaceAndPath(Radiant.MOD_ID, "solaroven");
+//    }
+//
+//    @Override
+//    public void appendServerData(CompoundTag data, BlockAccessor accessor) {
+//        Solar_Oven_Block block = (Solar_Oven_Block) accessor.getBlock();
+//        Level level = accessor.getLevel();
+//        data.putFloat("Intensity", block.intensity(level, accessor.getPosition()));
+//        BlockState state = accessor.getBlockEntity().getBlockState();
+//        data.putInt("ChargeRate", state.getValue(Solar_Oven_Block.INTENSITY));
+//    }
+//}

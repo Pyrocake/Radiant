@@ -21,6 +21,8 @@ import net.minecraft.world.level.block.CarvedPumpkinBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.jarjar.nio.util.Lazy;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -63,34 +65,29 @@ public class CollectorBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.saveAdditional(compoundTag, provider);
-
-        var radiantData = new CompoundTag();
-        //radiantData.put("Inventory", this.items.serializeNBT());
-        radiantData.put("Energy", this.energy.serializeNBT(provider));
-        compoundTag.put(Radiant.MOD_ID, radiantData);
+    protected void saveAdditional(ValueOutput out) {
+        super.saveAdditional(out);
+        energy.serialize(out);
     }
 
     @Override
-    public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.loadAdditional(compoundTag, provider);
-        Optional<CompoundTag> radiantData = compoundTag.getCompound(Radiant.MOD_ID);
-        if(radiantData.isEmpty())
-            return;
-        if (radiantData.get().contains("Inventory")) {
-            //this.items.(tutorialmodData.getCompound("Inventory"));
-        }
-        if(radiantData.get().contains("Energy")) {
-            this.energy.deserializeNBT(provider, radiantData.get().get("Energy"));
-        }
+    public void loadAdditional(ValueInput in) {
+        super.loadAdditional(in);
+        energy.deserialize(in);
+//        Optional<CompoundTag> radiantData = compoundTag.getCompound(Radiant.MOD_ID);
+//        if(radiantData.isEmpty())
+//            return;
+//        if (radiantData.get().contains("Inventory")) {
+//            //this.items.(tutorialmodData.getCompound("Inventory"));
+//        }
+//        if(radiantData.get().contains("Energy")) {
+//            this.energy.deserializeNBT(provider, radiantData.get().get("Energy"));
+//        }
     }
 
     @Override
     public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
-        CompoundTag tag = super.getUpdateTag(provider);
-        tag.put("Energy", this.energy.serializeNBT(provider));
-        return tag;
+        return saveWithoutMetadata(provider);
     }
 
     @Nullable

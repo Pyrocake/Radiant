@@ -14,10 +14,8 @@ import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.BoxStyle;
 import snownee.jade.api.ui.IElement;
 import snownee.jade.api.ui.IElementHelper;
-import snownee.jade.api.ui.ProgressStyle;
 import snownee.jade.impl.ui.ElementHelper;
 import snownee.jade.impl.ui.ProgressElement;
-import snownee.jade.impl.ui.StyledElement;
 
 import java.awt.*;
 import java.util.Objects;
@@ -25,44 +23,44 @@ import java.util.Objects;
 import static io.github.pyrocake.block.custom.Collector_Block.INTENSITY;
 import static java.awt.Color.*;
 
-public enum CollectorProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
-    INSTANCE;
-
-    @Override
-    public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (blockAccessor.getBlockEntity() instanceof CollectorBlockEntity entity) {
-            if (blockAccessor.getServerData().contains("Energy")) {
-                float ener = blockAccessor.getServerData().getFloat("Energy").get();
-                iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Energy").get() / blockAccessor.getServerData().getFloat("Capacity").get()),
-                        Component.translatable("radiant.energybar", (int) ener),
-                        IElementHelper.get().progressStyle().color(0x81d5f6).textColor(0xFFFFFF), BoxStyle.getNestedBox(), true));
-            }
-            if (blockAccessor.getServerData().contains("Intensity")) {
-                iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Intensity").get() / 15F),
-                        Component.translatable("radiant.exposure", blockAccessor.getServerData().getInt("ChargeRate").get()),
-                        IElementHelper.get().progressStyle().color(red.getRGB()).textColor(0xFFFFFF), BoxStyle.getNestedBox(), true));
-            }
-
-        }
-    }
-
-
-    @Override
-    public ResourceLocation getUid() {
-        return ResourceLocation.fromNamespaceAndPath(Radiant.MOD_ID, "collector");
-    }
-
-    @Override
-    public void appendServerData(CompoundTag data, BlockAccessor accessor) {
-
-        CollectorBlockEntity collector = (CollectorBlockEntity) accessor.getBlockEntity();
-        data.putFloat("Energy", (float) collector.getEnergy().getEnergyStored());
-        data.putFloat("Capacity", (float) collector.getEnergy().getMaxEnergyStored());
-
-        Collector_Block block = (Collector_Block) accessor.getBlock();
-        Level level = accessor.getLevel();
-        BlockState state = accessor.getBlockEntity().getBlockState();
-        data.putInt("ChargeRate", state.getValue(INTENSITY));
-        data.putFloat("Intensity", block.intensity(level, accessor.getPosition()));
-    }
-}
+//public enum CollectorProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
+//    INSTANCE;
+//
+//    @Override
+//    public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
+//        if (blockAccessor.getBlockEntity() instanceof CollectorBlockEntity entity) {
+//            if (blockAccessor.getServerData().contains("Energy")) {
+//                float ener = blockAccessor.getServerData().getFloat("Energy").get();
+//                iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Energy").get() / blockAccessor.getServerData().getFloat("Capacity").get()),
+//                        Component.translatable("radiant.energybar", (int) ener),
+//                        IElementHelper.get().progressStyle().color(0x81d5f6).textColor(0xFFFFFF), BoxStyle.getNestedBox(), true));
+//            }
+//            if (blockAccessor.getServerData().contains("Intensity")) {
+//                iTooltip.add(new ProgressElement((blockAccessor.getServerData().getFloat("Intensity").get() / 15F),
+//                        Component.translatable("radiant.exposure", blockAccessor.getServerData().getInt("ChargeRate").get()),
+//                        IElementHelper.get().progressStyle().color(red.getRGB()).textColor(0xFFFFFF), BoxStyle.getNestedBox(), true));
+//            }
+//
+//        }
+//    }
+//
+//
+//    @Override
+//    public ResourceLocation getUid() {
+//        return ResourceLocation.fromNamespaceAndPath(Radiant.MOD_ID, "collector");
+//    }
+//
+//    @Override
+//    public void appendServerData(CompoundTag data, BlockAccessor accessor) {
+//
+//        CollectorBlockEntity collector = (CollectorBlockEntity) accessor.getBlockEntity();
+//        data.putFloat("Energy", (float) collector.getEnergy().getEnergyStored());
+//        data.putFloat("Capacity", (float) collector.getEnergy().getMaxEnergyStored());
+//
+//        Collector_Block block = (Collector_Block) accessor.getBlock();
+//        Level level = accessor.getLevel();
+//        BlockState state = accessor.getBlockEntity().getBlockState();
+//        data.putInt("ChargeRate", state.getValue(INTENSITY));
+//        data.putFloat("Intensity", block.intensity(level, accessor.getPosition()));
+//    }
+//}

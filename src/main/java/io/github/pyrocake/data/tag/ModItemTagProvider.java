@@ -5,24 +5,18 @@ import io.github.pyrocake.item.ModItems;
 import io.github.pyrocake.util.TagsInit;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagProvider extends ItemTagsProvider {
-    public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, BlockTagsProvider provider) {
-        super(output, lookupProvider, provider.contentsGetter(), Radiant.MOD_ID);
+    public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ModBlockTagsProvider modBlockTagsProvider) {
+        super(output, lookupProvider, Radiant.MOD_ID);
     }
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        copy(TagsInit.Blocks.PRISMALLON_BLOCK_TAG, TagsInit.Items.PRISMALLON_BLOCK_TAG);
-
-        copy(TagsInit.Blocks.PRISMALLON_ORE_TAG, TagsInit.Items.ORE_TAG);
-        copy(TagsInit.Blocks.DEEPSLATE_PRISMALLON_ORE_TAG, TagsInit.Items.DEEPSLATE_ORE_TAG);
-
         tag(TagsInit.Items.PRISMALLON_INGOT_TAG).add(ModItems.PRISMALLON_INGOT.get());
         tag(TagsInit.Items.RAW_TAG).add(ModItems.RAW_PRISMALLON.get());
 

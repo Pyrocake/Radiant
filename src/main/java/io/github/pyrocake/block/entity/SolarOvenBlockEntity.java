@@ -25,6 +25,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -38,7 +41,6 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     public final NonNullList<ItemStack> items = NonNullList.withSize(NUM_SLOTS, ItemStack.EMPTY);
     private final int[] cookingProgress = new int[NUM_SLOTS];
     private final int[] cookingTime = new int[NUM_SLOTS];
-
 
     public SolarOvenBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_OVEN_BLOCK_ENTITY.get(), pos, blockState);
@@ -131,27 +133,23 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     }
 
     @Override
-    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.loadAdditional(compoundTag, provider);
-        this.items.clear();
-        ContainerHelper.loadAllItems(compoundTag, this.items, provider);
-        if (compoundTag.contains("CookingTimes")) {
-            int[] aint = compoundTag.getIntArray("CookingTimes").get();
-            System.arraycopy(aint, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, aint.length));
-        }
+    protected void loadAdditional(ValueInput in) {
+        super.loadAdditional(in);
+        items.clear();
+        ContainerHelper.loadAllItems(in, this.items);
 
-        if (compoundTag.contains("CookingTotalTimes")) {
-            int[] aint1 = compoundTag.getIntArray("CookingTotalTimes").get();
-            System.arraycopy(aint1, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, aint1.length));
-        }
+        int[] aint = in.getIntArray("CookingTimes").get();
+        System.arraycopy(aint, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, aint.length));
+        int[] aint1 = in.getIntArray("CookingTotalTimes").get();
+        System.arraycopy(aint1, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, aint1.length));
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.saveAdditional(compoundTag, provider);
-        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
-        compoundTag.putIntArray("CookingTimes", this.cookingProgress);
-        compoundTag.putIntArray("CookingTotalTimes", this.cookingTime);
+    protected void saveAdditional(ValueOutput out) {
+        super.saveAdditional(out);
+        ContainerHelper.saveAllItems(out, this.items, true);
+        out.putIntArray("CookingTimes", this.cookingProgress);
+        out.putIntArray("CookingTotalTimes", this.cookingTime);
     }
 
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
@@ -176,9 +174,9 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
 
     @Override
     public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
-        CompoundTag compoundTag = new CompoundTag();
-        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
-        return compoundTag;
+//        CompoundTag compoundTag = new CompoundTag();
+//        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
+        return saveWithoutMetadata(provider);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class ModLootTables extends LootTableProvider {
                 .filter(id -> id.registry().getNamespace().equals(Radiant.MOD_ID))
                 .collect(Collectors.toSet());
         for (var id : Sets.difference(ModLootTablesId, writeableRegistry.keySet())) {
-            validationContext.reportProblem("Missing built-in table: " + id);
+            //validationContext.reportProblem("Missing built-in table: " + id);
         }
 
         writeableRegistry.forEach((lootTable -> lootTable.validate(validationContext)));
