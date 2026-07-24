@@ -22,6 +22,11 @@ repositories {
     mavenLocal()
 
     maven {
+        name = "Jared's Maven"
+        url = "https://maven.blamejared.com/"
+    }
+
+    maven {
         url "https://www.cursemaven.com"
         content {
             includeGroup "curse.maven"
@@ -121,17 +126,12 @@ configurations {
 }
 
 dependencies {
-    // Example optional mod dependency with JEI
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-    // compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
+    // JEI is optional for players, but its API is used to expose Solar Oven recipes.
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
-    // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
-    // localRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
     implementation "curse.maven:jade-324717:6853386"
-
-    // Recipe-browser used by the development client. Radiant remains usable without JEI.
-    localRuntime "curse.maven:jei-238222:7391682"
 
     //implementation "curse.maven:architectury-api-419699:6406228"
     //implementation "curse.maven:cloth-config-348521:6351757"
