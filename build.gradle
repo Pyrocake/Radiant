@@ -130,6 +130,9 @@ dependencies {
     // localRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
     implementation "curse.maven:jade-324717:6853386"
 
+    // Recipe-browser used by the development client. Radiant remains usable without JEI.
+    localRuntime "curse.maven:jei-238222:7391682"
+
     //implementation "curse.maven:architectury-api-419699:6406228"
     //implementation "curse.maven:cloth-config-348521:6351757"
 

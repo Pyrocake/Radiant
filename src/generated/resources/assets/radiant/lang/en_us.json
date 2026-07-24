@@ -15,5 +15,9 @@
   "config.jade.plugin_radiant.solaroven": "Solar Oven",
   "radiant.heatdisp": "Exposure",
   "radiant.exposure": "Exposure (+%d/t)",
-  "radiant.energybar": "%d SP"
+  "radiant.energybar": "%d SP",
+  "radiant.jade.energy": "Sunlight: %s / %s SP",
+  "radiant.jade.exposure": "Exposure: %s/15 (+%s SP/t)",
+  "radiant.jade.heat": "Heat: %s/15",
+  "radiant.jade.cooking": "Cooking %s item(s)"
 }
