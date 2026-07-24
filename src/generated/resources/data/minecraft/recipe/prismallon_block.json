@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "radiant:prismallon_ingot"
+    "#": {
+      "item": "radiant:prismallon_ingot"
+    }
   },
   "pattern": [
     "###",

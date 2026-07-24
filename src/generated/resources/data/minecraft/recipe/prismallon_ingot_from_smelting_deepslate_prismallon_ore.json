@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 1.0,
   "group": "prismallon_ingot",
-  "ingredient": "radiant:deepslate_prismallon_ore",
+  "ingredient": {
+    "item": "radiant:deepslate_prismallon_ore"
+  },
   "result": {
     "count": 1,
     "id": "radiant:prismallon_ingot"

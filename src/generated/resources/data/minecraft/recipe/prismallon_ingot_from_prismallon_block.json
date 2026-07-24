@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "prismallon_ingot",
   "ingredients": [
-    "radiant:prismallon_block"
+    {
+      "item": "radiant:prismallon_block"
+    }
   ],
   "result": {
     "count": 9,
