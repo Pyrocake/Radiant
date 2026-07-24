@@ -5,6 +5,7 @@ import io.github.pyrocake.block.ModBlocks;
 import io.github.pyrocake.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ModBlockStateProvider extends BlockStateProvider {
@@ -19,15 +20,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.RAW_PRISMALLON_BLOCK.get(), cubeAll(ModBlocks.RAW_PRISMALLON_BLOCK.get()));
         simpleBlockWithItem(ModBlocks.PRISMALLON_ORE_BLOCK.get(), cubeAll(ModBlocks.PRISMALLON_ORE_BLOCK.get()));
         simpleBlockWithItem(ModBlocks.DEEPSLATE_PRISMALLON_ORE_BLOCK.get(), cubeAll(ModBlocks.DEEPSLATE_PRISMALLON_ORE_BLOCK.get()));
-        simpleBlockWithItem(ModBlocks.CONNECTOR_BLOCK.get(), cubeAll(ModBlocks.CONNECTOR_BLOCK.get()));
-        simpleBlockWithItem(ModBlocks.SUN_BLOCK.get(), cubeAll(ModBlocks.SUN_BLOCK.get()));
-        simpleBlockWithItem(ModBlocks.SOLAR_OVEN_BLOCK.get(), cubeAll(ModBlocks.SOLAR_OVEN_BLOCK.get()));
-        //simpleBlock(ModBlocks.SUN_BLOCK.get(), new ModelFile.UncheckedModelFile(modLoc("block/sun_block")));
-        simpleBlockWithItem(ModBlocks.COLLECTOR_BLOCK.get(), cubeAll(ModBlocks.COLLECTOR_BLOCK.get()));
+        legacyBlockItem(ModBlocks.CONNECTOR_BLOCK.get());
+        legacyBlockItem(ModBlocks.SUN_BLOCK.get());
+        legacyBlockItem(ModBlocks.SOLAR_OVEN_BLOCK.get());
+        legacyBlockItem(ModBlocks.COLLECTOR_BLOCK.get());
 
         //Items
         itemModels().basicItem(ModItems.PRISMALLON_INGOT.get());
         itemModels().basicItem(ModItems.RAW_PRISMALLON.get());
         itemModels().basicItem(ModItems.PRISMALLON_NUGGET.get());
-        }
     }
+
+    private void legacyBlockItem(net.minecraft.world.level.block.Block block) {
+        String name = block.getDescriptionId().substring(block.getDescriptionId().lastIndexOf('.') + 1);
+        itemModels().getBuilder(name)
+                .parent(new ModelFile.UncheckedModelFile(modLoc("block/" + name)));
+    }
+}
