@@ -5,14 +5,15 @@ import io.github.pyrocake.item.ModItems;
 import io.github.pyrocake.util.TagsInit;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.ItemTagsProvider;
+import net.minecraft.data.tags.ItemTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagProvider extends ItemTagsProvider {
-    public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ModBlockTagsProvider modBlockTagsProvider) {
-        super(output, lookupProvider, Radiant.MOD_ID);
+    public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ModBlockTagsProvider modBlockTagsProvider, ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, modBlockTagsProvider.contentsGetter(), Radiant.MOD_ID, existingFileHelper);
     }
 
     @Override

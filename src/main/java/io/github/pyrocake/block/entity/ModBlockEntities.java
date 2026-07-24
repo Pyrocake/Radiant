@@ -15,22 +15,22 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<SunBlockBlockEntity>> SUN_BLOCK_BLOCK_ENTITY = BLOCK_ENTITIES.register("sun_block_block_entity",
             () -> new BlockEntityType<>(
                     SunBlockBlockEntity::new,
-                    ModBlocks.SUN_BLOCK.get()
+                    ModBlocks.SUN_BLOCK.get(), null
             ));
     public static final Supplier<BlockEntityType<ConnectorBlockEntity>> CONNECTOR_BLOCK_ENTITY = BLOCK_ENTITIES.register("connector_block_entity",
             () -> new BlockEntityType<>(
                     ConnectorBlockEntity::new,
-                    ModBlocks.CONNECTOR_BLOCK.get()
+                    ModBlocks.CONNECTOR_BLOCK.get(), null
             ));
     public static final Supplier<BlockEntityType<SolarOvenBlockEntity>> SOLAR_OVEN_BLOCK_ENTITY = BLOCK_ENTITIES.register("solar_oven_block_entity",
             () -> new BlockEntityType<>(
                     SolarOvenBlockEntity::new,
-                    ModBlocks.SOLAR_OVEN_BLOCK.get()
+                    ModBlocks.SOLAR_OVEN_BLOCK.get(), null
             ));
     public static final Supplier<BlockEntityType<CollectorBlockEntity>> COLLECTOR_BLOCK_ENTITY = BLOCK_ENTITIES.register("collector_block_entity",
             () -> new BlockEntityType<>(
                     CollectorBlockEntity::new,
-                    ModBlocks.COLLECTOR_BLOCK.get()
+                    ModBlocks.COLLECTOR_BLOCK.get(), null
             ));
 
     public static void register(IEventBus eventBus) {

@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -86,7 +86,7 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
     }
 
     @Override
-    protected InteractionResult useItemOn(
+    protected ItemInteractionResult useItemOn(
             ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult
     ) {
         if (level.getBlockEntity(blockPos) instanceof SolarOvenBlockEntity oven) {
@@ -94,12 +94,12 @@ public class Solar_Oven_Block extends BaseEntityBlock implements EntityBlock {
             if (level.getRecipeManager().getRecipeFor(
                     RecipeType.SMELTING, new SingleRecipeInput(itemStack2), level).isPresent()) {
                 if (level instanceof ServerLevel serverLevel && oven.placeSmeltable(serverLevel, player, itemStack2)) {
-                    return InteractionResult.SUCCESS_SERVER;
+                    return ItemInteractionResult.SUCCESS;
                 }
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
             }
         }
-        return InteractionResult.TRY_WITH_EMPTY_HAND;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Nullable

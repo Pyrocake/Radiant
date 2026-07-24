@@ -3,7 +3,7 @@ package io.github.pyrocake.data;
 import io.github.pyrocake.Radiant;
 import io.github.pyrocake.data.lang.ModEnLangProvider;
 import io.github.pyrocake.data.loot.ModLootTables;
-import io.github.pyrocake.data.recipe.ModRecipeRunner;
+import io.github.pyrocake.data.recipe.CraftingHelper;
 import io.github.pyrocake.data.tag.ModBlockTagsProvider;
 import io.github.pyrocake.data.tag.ModItemTagProvider;
 import io.github.pyrocake.data.texture.ModBlockStateProvider;
@@ -20,25 +20,23 @@ import java.util.concurrent.CompletableFuture;
 @EventBusSubscriber(modid = Radiant.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent.Client event) {
+    public static void gatherData(GatherDataEvent event) {
         try {
             DataGenerator generator = event.getGenerator();
             PackOutput output = generator.getPackOutput();
             CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-            HolderLookup.Provider provider = null;
-
             generator.addProvider(true, new ModEnLangProvider(output));
 
             //generator.addProvider(true, new ModItemStateProvider(output));
-            generator.addProvider(true, new ModBlockStateProvider(output));
+            generator.addProvider(true, new ModBlockStateProvider(output, event.getExistingFileHelper()));
 
-            ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(output, lookupProvider);
+            ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(output, lookupProvider, event.getExistingFileHelper());
             generator.addProvider(true, modBlockTagsProvider);
-            generator.addProvider(true, new ModItemTagProvider(output, event.getLookupProvider(), modBlockTagsProvider));
+            generator.addProvider(true, new ModItemTagProvider(output, lookupProvider, modBlockTagsProvider, event.getExistingFileHelper()));
 
             generator.addProvider(true, new ModLootTables(output, lookupProvider));
 
-            generator.addProvider(true, new ModRecipeRunner(output, lookupProvider));
+            generator.addProvider(true, new CraftingHelper(output, lookupProvider));
 
             Radiant.logger.info("World Gen Starting");
             generator.addProvider(true, new ModWorldGenProvider(output, lookupProvider));

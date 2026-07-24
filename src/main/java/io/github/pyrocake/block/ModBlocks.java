@@ -6,9 +6,6 @@ import io.github.pyrocake.block.custom.Connector_Block;
 import io.github.pyrocake.block.custom.Solar_Oven_Block;
 import io.github.pyrocake.block.custom.Sun_Block;
 import io.github.pyrocake.item.ModItems;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -36,11 +33,11 @@ public class ModBlocks {
     public static final DeferredBlock<Solar_Oven_Block> SOLAR_OVEN_BLOCK = registerBlockWithItem("solar_oven_block", Solar_Oven_Block::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
 
     public static <T extends Block> DeferredBlock<T> registerBlockWithItem(String name, Function<BlockBehaviour.Properties, T> block, Supplier<BlockBehaviour.Properties> properties) {
-        DeferredBlock<T> toReturn = BLOCKS.register(name, () -> block.apply(properties.get().setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Radiant.MOD_ID, name)))));
+        DeferredBlock<T> toReturn = BLOCKS.register(name, () -> block.apply(properties.get()));
         ModItems.register(
                 name,
                 itemProps -> new BlockItem(toReturn.get(), itemProps),
-                () -> new Item.Properties().useBlockDescriptionPrefix());
+                Item.Properties::new);
         return toReturn;
     }
 
