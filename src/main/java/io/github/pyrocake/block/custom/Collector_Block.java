@@ -69,15 +69,16 @@ public class Collector_Block extends BaseEntityBlock implements EntityBlock {
         }
     }
 
-//    protected void onRemove(BlockState blockState, Level level, BlockPos pos,  BlockState state, boolean isMoving) {
-//        if (!blockState.is(state.getBlock())) {
-//            BlockEntity blockentity = level.getBlockEntity(pos);
-//            if (blockentity instanceof CollectorBlockEntity) {
-//                Containers.dropContents(level, pos, ((CollectorBlockEntity)blockentity).getItems());
-//            }
-//            super.onRemove(blockState, level, pos, state, isMoving);
-//        }
-//    }
+    @Override
+    protected void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState state, boolean isMoving) {
+        if (!blockState.is(state.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof CollectorBlockEntity collector) {
+                Containers.dropContents(level, pos, collector.getInventory());
+            }
+            super.onRemove(blockState, level, pos, state, isMoving);
+        }
+    }
 
 
 

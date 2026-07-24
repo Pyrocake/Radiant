@@ -13,7 +13,6 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -21,8 +20,6 @@ import net.minecraft.world.level.block.CarvedPumpkinBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.jarjar.nio.util.Lazy;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -30,7 +27,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.security.DrbgParameters;
-import java.util.Optional;
 
 import static io.github.pyrocake.block.custom.Collector_Block.INTENSITY;
 
@@ -65,29 +61,27 @@ public class CollectorBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(ValueOutput out) {
-        super.saveAdditional(out);
-        energy.serialize(out);
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.saveAdditional(compoundTag, provider);
+        CompoundTag radiantData = new CompoundTag();
+        radiantData.put("Energy", this.energy.serializeNBT(provider));
+        compoundTag.put(Radiant.MOD_ID, radiantData);
     }
 
     @Override
-    public void loadAdditional(ValueInput in) {
-        super.loadAdditional(in);
-        energy.deserialize(in);
-//        Optional<CompoundTag> radiantData = compoundTag.getCompound(Radiant.MOD_ID);
-//        if(radiantData.isEmpty())
-//            return;
-//        if (radiantData.get().contains("Inventory")) {
-//            //this.items.(tutorialmodData.getCompound("Inventory"));
-//        }
-//        if(radiantData.get().contains("Energy")) {
-//            this.energy.deserializeNBT(provider, radiantData.get().get("Energy"));
-//        }
+    public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
+        CompoundTag radiantData = compoundTag.getCompound(Radiant.MOD_ID);
+        if (radiantData.contains("Energy")) {
+            this.energy.deserializeNBT(provider, radiantData.get("Energy"));
+        }
     }
 
     @Override
     public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
-        return saveWithoutMetadata(provider);
+        CompoundTag tag = super.getUpdateTag(provider);
+        tag.put("Energy", this.energy.serializeNBT(provider));
+        return tag;
     }
 
     @Nullable
@@ -150,12 +144,5 @@ public class CollectorBlockEntity extends BlockEntity {
     private void markUpdated() {
         this.setChanged();
         this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
-    }
-
-    @Override
-    public void preRemoveSideEffects(BlockPos blockPos, BlockState blockState) {
-        if (this.level != null) {
-            Containers.dropContents(this.level, blockPos, this.items);
-        }
     }
 }

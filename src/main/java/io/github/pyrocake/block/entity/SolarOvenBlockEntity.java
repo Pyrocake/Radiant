@@ -5,7 +5,6 @@ import io.github.pyrocake.block.custom.Solar_Oven_Block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -25,8 +24,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -102,7 +99,7 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
         for (int i = 0; i < this.items.size(); i++) {
             ItemStack itemStack2 = this.items.get(i);
             if (itemStack2.isEmpty()) {
-                Optional<RecipeHolder<SmeltingRecipe>> optional = serverLevel.recipeAccess()
+                Optional<RecipeHolder<SmeltingRecipe>> optional = serverLevel.getRecipeManager()
                         .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(itemStack), serverLevel);
                 if (optional.isEmpty()) {
                     return false;
@@ -133,23 +130,26 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     }
 
     @Override
-    protected void loadAdditional(ValueInput in) {
-        super.loadAdditional(in);
-        items.clear();
-        ContainerHelper.loadAllItems(in, this.items);
-
-        int[] aint = in.getIntArray("CookingTimes").get();
-        System.arraycopy(aint, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, aint.length));
-        int[] aint1 = in.getIntArray("CookingTotalTimes").get();
-        System.arraycopy(aint1, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, aint1.length));
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
+        this.items.clear();
+        ContainerHelper.loadAllItems(compoundTag, this.items, provider);
+        if (compoundTag.contains("CookingTimes", 11)) {
+            int[] times = compoundTag.getIntArray("CookingTimes");
+            System.arraycopy(times, 0, this.cookingProgress, 0, Math.min(this.cookingProgress.length, times.length));
+        }
+        if (compoundTag.contains("CookingTotalTimes", 11)) {
+            int[] totalTimes = compoundTag.getIntArray("CookingTotalTimes");
+            System.arraycopy(totalTimes, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, totalTimes.length));
+        }
     }
 
     @Override
-    protected void saveAdditional(ValueOutput out) {
-        super.saveAdditional(out);
-        ContainerHelper.saveAllItems(out, this.items, true);
-        out.putIntArray("CookingTimes", this.cookingProgress);
-        out.putIntArray("CookingTotalTimes", this.cookingTime);
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.saveAdditional(compoundTag, provider);
+        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
+        compoundTag.putIntArray("CookingTimes", this.cookingProgress);
+        compoundTag.putIntArray("CookingTotalTimes", this.cookingTime);
     }
 
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
@@ -161,7 +161,7 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
     }
 
     @Override
-    protected void applyImplicitComponents(DataComponentGetter input) {
+    protected void applyImplicitComponents(BlockEntity.DataComponentInput input) {
         super.applyImplicitComponents(input);
         input.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
     }
@@ -174,15 +174,8 @@ public class SolarOvenBlockEntity extends BlockEntity implements Clearable {
 
     @Override
     public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
-//        CompoundTag compoundTag = new CompoundTag();
-//        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
-        return saveWithoutMetadata(provider);
-    }
-
-    @Override
-    public void preRemoveSideEffects(BlockPos blockPos, BlockState blockState) {
-        if (this.level != null) {
-            Containers.dropContents(this.level, blockPos, this.getItems());
-        }
+        CompoundTag compoundTag = new CompoundTag();
+        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
+        return compoundTag;
     }
 }

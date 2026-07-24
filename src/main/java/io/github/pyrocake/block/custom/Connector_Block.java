@@ -6,19 +6,16 @@ import io.github.pyrocake.block.ModBlocks;
 import io.github.pyrocake.block.entity.ConnectorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.apache.logging.log4j.core.config.Scheduled;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,14 +41,16 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess access, BlockPos facingPos, Direction facing, BlockPos currentPos, BlockState facingState, RandomSource randomSource) {
+    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState,
+                                     LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
         boolean flag = facingState.is(this) || facingState.is(ModBlocks.CONNECTOR_BLOCK);
         return state.setValue(PROPERTY_BY_DIRECTION.get(facing), flag);
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, Orientation direction, boolean movedByPiston) {
-        super.neighborChanged(state, level, pos, neighborBlock, direction, movedByPiston);
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock,
+                                   BlockPos neighborPos, boolean movedByPiston) {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
     }
 
     @Override
@@ -114,8 +113,8 @@ public class Connector_Block extends PipeBlock implements EntityBlock {
         builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 
-//    @Override
-//    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-//        super.onRemove(state, level, pos, newState, movedByPiston);
-//    }
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        super.onRemove(state, level, pos, newState, movedByPiston);
+    }
 }
